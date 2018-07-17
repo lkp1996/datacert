@@ -1,0 +1,54 @@
+/* app css stylesheet */
+
+.menu {
+    list-style: none;
+    border-bottom: 0.1em solid black;
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
+}
+
+.menu:before {
+    content: "[";
+}
+
+.menu:after {
+    content: "]";
+}
+
+.menu > li {
+    display: inline;
+}
+
+.menu > li + li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+
+.clickable-tr:hover {
+    cursor: pointer;
+}
+
+.navbar-nav > li > .dropdown-menu {
+    background-color: #343a40 !important;
+
+}
+
+.navbar-nav > li > .dropdown-menu a {
+    color: rgba(255, 255, 255, .5);
+}
+
+.navbar-nav > li > .dropdown-menu a:hover {
+    color: #212529;
+}
+
+.full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+}
+
+.partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+}

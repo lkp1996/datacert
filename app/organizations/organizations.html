@@ -1,0 +1,16 @@
+<h1 class="jumbotron-heading">Organisations</h1>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Organisation</th>
+        <th>Localité</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="organization in organizations" class="clickable-tr" ng-click="goTo(organization.pk_organization)">
+        <td>{{organization.name}}</td>
+        <td>{{organization.location}}</td>
+    </tr>
+    </tbody>
+</table>

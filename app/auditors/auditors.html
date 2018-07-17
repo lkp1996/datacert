@@ -1,0 +1,22 @@
+<h1 class="jumbotron-heading">Auditeurs</h1>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Numéro de téléphone</th>
+        <th scope="col">Email</th>
+        <th scope="col">Poste actuel</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="auditor in auditors" class="clickable-tr" ng-click="goTo(auditor.pk_auditor)">
+        <th>{{auditor.lastName}}</th>
+        <td>{{auditor.firstName}}</td>
+        <td>{{auditor.phone}}</td>
+        <td>{{auditor.email}}</td>
+        <td>{{auditor.currentTitle}}</td>
+    </tr>
+    </tbody>
+</table>

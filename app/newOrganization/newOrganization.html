@@ -1,0 +1,53 @@
+<h1 class="jumbotron-heading">Ajouter Nouvelle Organisation</h1>
+<form name="form" role="form">
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label>Nom</label>
+            <input type="text" class="form-control" placeholder="Nom" ng-required="true"
+                   required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-3 mb-3">
+            <label>Adresse</label>
+            <input type="text" class="form-control" placeholder="Adresse" ng-required="true"
+                   required>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label>NPA</label>
+            <input type="text" class="form-control" placeholder="NPA" ng-required="true"
+                   required>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label>Localité</label>
+            <input type="text" class="form-control" placeholder="Localité" ng-required="true"
+                   required>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label>Pays</label>
+            <input type="text" class="form-control" placeholder="Pays" ng-required="true"
+                   required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label>Nom de la personne de contact</label>
+            <input type="text" class="form-control" placeholder="Nom de la personne de contact" ng-required="true"
+                   required>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label>Téléphone</label>
+            <input type="text" class="form-control" placeholder="Téléphone" ng-required="true"
+                   required>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label>Email</label>
+            <input type="email" class="form-control" placeholder="Email" ng-required="true"
+                   required>
+        </div>
+    </div>
+    <div class="form-row">
+
+    </div>
+    <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid">Confirmer</button>
+</form>

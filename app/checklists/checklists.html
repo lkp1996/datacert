@@ -1,0 +1,47 @@
+<h1 class="jumbotron-heading">Checklists</h1>
+<div ng-repeat="checklist in checklists">
+    <h3 ng-if="!modified">{{checklist.name}}</h3>
+
+
+    <div class="input-group mb-3" ng-if="modified">
+        <input type="text" class="form-control"
+               ng-model="checklist.name" placeholder="Nom de la checklist">
+        <div class="input-group-append">
+            <button class="btn btn-danger" type="button" ng-click="delChecklist($index)">Supprimer checklist</button>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th ng-if="modified"></th>
+            <th>Points</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="check in checklist.points" ng-if="!modified">
+            <td>{{check.point}}</td>
+        </tr>
+        <tr ng-repeat="check in checklist.points" ng-if="modified">
+            <td><a class="a-remove" ng-click="delRow(checklist.points, $index)">
+                <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
+            </a></td>
+            <td><input type="text" class="form-control"
+                       ng-model="check.point"></td>
+        </tr>
+        <tr ng-if="modified">
+            <td><a ng-click="addCheck(checklist.points)">
+                <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
+            </a></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="row placeholders">
+    <div class="col-xs-12 col-sm-12 placeholder">
+        <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()" ng-if="!modified">
+        <button class="btn btn-success" ng-click="updateChecklist()" ng-if="modified">Sauvegarder</button>
+        <button class="btn btn-primary" ng-click="addChecklist()" ng-if="modified">Nouvelle checklist</button>
+        <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
+    </div>
+</div>
