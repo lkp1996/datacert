@@ -3,30 +3,25 @@
     <div class="form-row">
         <div class="col-md-6 mb-3">
             <label>Prénom</label>
-            <input type="text" class="form-control" placeholder="Prénom" ng-required="true"
-                   required>
+            <input type="text" class="form-control" placeholder="Prénom" ng-model="auditor.firstName"
+                   ng-required="true" required>
         </div>
         <div class="col-md-6 mb-3">
             <label>Nom</label>
-            <input type="text" class="form-control" placeholder="Nom" ng-required="true"
-                   required>
+            <input type="text" class="form-control" placeholder="Nom" ng-model="auditor.lastName"
+                   ng-required="true" required>
         </div>
     </div>
     <div class="form-row">
         <div class="col-md-6 mb-3">
-            <label>Date de naissance</label>
-            <date-picker-simple-input
-                    dt=""></date-picker-simple-input>
+            <label>Téléphone</label>
+            <input type="text" class="form-control" placeholder="Téléphone" ng-model="auditor.phone"
+                   ng-required="true" required>
         </div>
-        <div class="col-md-3 mb-3">
-            <label>Localité</label>
-            <input type="text" class="form-control" placeholder="Localité" ng-required="true"
-                   required>
-        </div>
-        <div class="col-md-3 mb-3">
-            <label>NPA</label>
-            <input type="text" class="form-control" placeholder="NPA" ng-required="true"
-                   required>
+        <div class="col-md-6 mb-3">
+            <label>Email</label>
+            <input type="text" class="form-control" placeholder="Email" ng-model="auditor.email"
+                   ng-required="true" required>
         </div>
     </div>
     <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid">Confirmer</button>

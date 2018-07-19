@@ -12,6 +12,7 @@ angular.module('myApp', [
     'myApp.newOrganization',
     'myApp.settings',
     'myApp.checklists',
+    'myApp.report',
     'myApp.datePicker',
     'myApp.datePickerSimple',
     'myApp.version',

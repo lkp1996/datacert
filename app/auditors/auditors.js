@@ -24,39 +24,34 @@ angular.module('myApp.auditors', ['ngRoute'])
                 "lastName" : "Beytrison",
                 "firstName" : "Isabelle",
                 "phone" : "+41793457140",
-                "email" : "i.beytrison@edelcert.ch",
-                "currentTitle" : "Auditrice"
+                "email" : "i.beytrison@edelcert.ch"
             },
             {
                 "pk_auditor" : 3,
                 "lastName" : "Droux",
                 "firstName" : "Alexandra",
                 "phone" : "+41765893049",
-                "email" : "a.droux@edelcert.ch",
-                "currentTitle" : "Responsable d'audit"
+                "email" : "a.droux@edelcert.ch"
             },
             {
                 "pk_auditor" : 4,
                 "lastName" : "Fournier",
                 "firstName" : "Patricia",
                 "phone" : "+41797579818",
-                "email" : "p.fournier@edelcert.ch",
-                "currentTitle" : "Auditrice"
+                "email" : "p.fournier@edelcert.ch"
             },
             {
                 "pk_auditor" : 5,
                 "lastName" : "Gobet",
                 "firstName" : "Jean-Claude",
                 "phone" : "+41269139409",
-                "email" : "j-c.gobet@edelcert.ch",
-                "currentTitle" : "Auditeur"
+                "email" : "j-c.gobet@edelcert.ch"
             },{
                 "pk_auditor" : 6,
                 "lastName" : "Gremaud",
                 "firstName" : "Nicolas",
                 "phone" : "+41786870478",
-                "email" : "n.gremaud@edelcert.ch",
-                "currentTitle" : "Auditeur"
+                "email" : "n.gremaud@edelcert.ch"
             }
         ];
 
