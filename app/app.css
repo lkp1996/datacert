@@ -52,3 +52,31 @@
     border-radius: 32px;
     color: black;
 }
+
+.table-check-question {
+    width: 35%;
+}
+
+.table-check-yes {
+    width: 5%;
+}
+
+.table-check-comment {
+    width: 60%;
+}
+
+.table-conclusion-title {
+    width: 90%;
+}
+
+table-conclusion-yesno {
+    width: 10%;
+}
+
+.table-doc-doc {
+    width: 30%;
+}
+
+.table-doc-description {
+    width: 70%;
+}

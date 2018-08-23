@@ -254,34 +254,34 @@
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <label>Scope IAF 1</label>
-                <select class="form-control" ng-if="modified">
-                    <option ng-repeat="iafScope1 in generalInfos.iafScopes1">{{iafScope1.scope}}</option>
-                </select>
-                <select class="form-control" ng-if="!modified" disabled>
-                    <option ng-repeat="iafScope1 in generalInfos.iafScopes1">{{iafScope1.scope}}</option>
-                </select>
+                <select class="form-control"
+                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
+                        ng-model="generalInfos.fk_iafScopes1" ng-if="modified"></select>
+                <select class="form-control"
+                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
+                        ng-model="generalInfos.fk_iafScopes1" ng-if="!modified" disabled></select>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <label>Scope IAF 2</label>
-                <select class="form-control" ng-if="modified">
-                    <option ng-repeat="iafScope2 in generalInfos.iafScopes2">{{iafScope2.scope}}</option>
-                </select>
-                <select class="form-control" ng-if="!modified" disabled>
-                    <option ng-repeat="iafScope2 in generalInfos.iafScopes2">{{iafScope2.scope}}</option>
-                </select>
+                <select class="form-control"
+                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
+                        ng-model="generalInfos.fk_iafScopes2" ng-if="modified"></select>
+                <select class="form-control"
+                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
+                        ng-model="generalInfos.fk_iafScopes2" ng-if="!modified" disabled></select>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <label>Scope IAF 3</label>
-                <select class="form-control" ng-if="modified">
-                    <option ng-repeat="iafScope3 in generalInfos.iafScopes3">{{iafScope3.scope}}</option>
-                </select>
-                <select class="form-control" ng-if="!modified" disabled>
-                    <option ng-repeat="iafScope3 in generalInfos.iafScopes3">{{iafScope3.scope}}</option>
-                </select>
+                <select class="form-control"
+                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
+                        ng-model="generalInfos.fk_iafScopes3" ng-if="modified"></select>
+                <select class="form-control"
+                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
+                        ng-model="generalInfos.fk_iafScopes3" ng-if="!modified" disabled></select>
             </div>
         </div>
         <div class="form-row">
@@ -403,24 +403,557 @@
         </div>
     </uib-tab>
     <uib-tab index="2" heading="{{tabs[2].name}}" disable="tabs[2].disabled">
-
+        <table class="table table-striped" ng-repeat="checklist in checklists">
+            <thead>
+            <tr>
+                <th class="table-check-question">Questions</th>
+                <th class="table-check-yes">OUI</th>
+                <th class="table-check-comment">Remarques</th>
+                <th ng-if="modified">
+                    <button class="btn btn-danger" ng-click="delChecklist($index)">Retirer Checklist</button>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="question in checklist.questions" ng-if="!modified">
+                <td>{{question.name}}</td>
+                <td><input type="checkbox" ng-checked="question.yesno" disabled></td>
+                <td>{{question.comment}}</td>
+                <td ng-if="modified"></td>
+            </tr>
+            <tr ng-repeat="question in checklist.questions" ng-if="modified">
+                <td>{{question.name}}</td>
+                <td><input type="checkbox" ng-model="question.yesno"></td>
+                <td><input type="text" class="form-control" ng-model="question.comment"></td>
+                <td ng-if="modified"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
+                       ng-if="!modified">
+                <button class="btn btn-success" ng-click="updateChecklists()" ng-if="modified">Sauvegarder</button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
+                <hr>
+                <div ng-if="modified">
+                    <h5>Ajouter Checklists</h5>
+                    <div class="list-group">
+                        <a ng-click="addChecklist($index)" class="list-group-item list-group-item-action"
+                           ng-repeat="otherCheck in otherChecklists">{{otherCheck.name}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </uib-tab>
     <uib-tab index="3" heading="{{tabs[3].name}}" disable="tabs[3].disabled">
-
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label>Responsable d'audit</label>
+            </div>
+            <div class="col-md-6 mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Nom"
+                       ng-model="leadAuditor.lastName"
+                       ng-if="modified">
+                <input type="text" class="form-control"
+                       placeholder="Nom"
+                       ng-model="leadAuditor.lastName"
+                       ng-if="!modified" disabled>
+            </div>
+            <div class="col-md-6 mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Prénom"
+                       ng-model="leadAuditor.firstName"
+                       ng-if="modified">
+                <input type="text" class="form-control"
+                       placeholder="Prénom"
+                       ng-model="leadAuditor.firstName"
+                       ng-if="!modified" disabled>
+            </div>
+        </div>
+        <label>Auditeur(s)</label>
+        <div class="form-row" ng-repeat="auditor in auditors">
+            <div class="col-md-1 mb-3">
+                <a ng-click="delRow(auditors, $index)" ng-if="modified">
+                    <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
+                </a>
+            </div>
+            <div class="col-md-6 mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Nom"
+                       ng-model="auditor.lastName"
+                       ng-if="modified">
+                <input type="text" class="form-control"
+                       placeholder="Nom"
+                       ng-model="auditor.lastName"
+                       ng-if="!modified" disabled>
+            </div>
+            <div class="col-md-5 mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Prénom"
+                       ng-model="auditor.firstName"
+                       ng-if="modified">
+                <input type="text" class="form-control"
+                       placeholder="Prénom"
+                       ng-model="auditor.firstName"
+                       ng-if="!modified" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-1 mb-3">
+                <a ng-click="addTeamAuditRow()"
+                   ng-if="modified">
+                    <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
+                </a>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th ng-if="modified"></th>
+                <th scope="col">Nom</th>
+                <th scope="col">Fonction</th>
+                <th scope="col">Réunion d'ouverture</th>
+                <th scope="col">Audit sur site</th>
+                <th scope="col">Réunion de clôture</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="auditedPerson in auditedPeople" ng-if="!modified">
+                <td>{{auditedPerson.lastName}} {{auditedPerson.firstName}}</td>
+                <td>{{auditedPerson.function}}</td>
+                <td><input type="checkbox" ng-checked="auditedPerson.openingMeeting" disabled></td>
+                <td><input type="checkbox" ng-checked="auditedPerson.onSiteAudit" disabled></td>
+                <td><input type="checkbox" ng-checked="auditedPerson.closingMeeting" disabled></td>
+            </tr>
+            <tr ng-repeat="auditedPerson in auditedPeople" ng-if="modified">
+                <td><a class="a-remove" ng-click="delRow(auditedPeople, $index)">
+                    <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
+                </a></td>
+                <td><input type="text" class="form-control" ng-model="auditedPerson.lastName" placeholder="Nom">
+                    <input type="text" class="form-control" ng-model="auditedPerson.firstName" placeholder="Prénom">
+                </td>
+                <td><input type="text" class="form-control" ng-model="auditedPerson.function" placeholder="Fonction">
+                </td>
+                <td><input type="checkbox" ng-checked="auditedPerson.openingMeeting"></td>
+                <td><input type="checkbox" ng-checked="auditedPerson.onSiteAudit"></td>
+                <td><input type="checkbox" ng-checked="auditedPerson.closingMeeting"></td>
+            </tr>
+            <tr ng-if="modified">
+                <td><a ng-click="addAuditedPersonRow()">
+                    <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
+                </a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
+                       ng-if="!modified">
+                <button class="btn btn-success" ng-click="updateAuditTeamAndAuditedPeople()" ng-if="modified">
+                    Sauvegarder
+                </button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
+                <hr>
+            </div>
+        </div>
     </uib-tab>
     <uib-tab index="4" heading="{{tabs[4].name}}" disable="tabs[4].disabled">
+        <div ng-repeat="generalFeeling in generalFeelings">
+            <h3>{{generalFeeling.name}}</h3>
+            <p><strong>Points positifs : </strong></p>
+            <ul ng-if="!modified">
+                <li ng-repeat="positivePoint in generalFeeling.positivePoints">{{positivePoint.content}}</li>
+            </ul>
+            <div class="form-row" ng-repeat="positivePoint in generalFeeling.positivePoints" ng-if="modified">
+                <div class="col-md-1 mb-3">
+                    <a ng-click="delRow(generalFeeling.positivePoints, $index)">
+                        <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
+                    </a>
+                </div>
+                <div class="col-md-11 mb-3">
+                    <input type="text" class="form-control"
+                           placeholder="Point positif"
+                           ng-model="positivePoint.content"
+                           ng-if="modified">
+                </div>
 
+            </div>
+            <div class="form-row">
+                <div class="col-md-1 mb-3">
+                    <a ng-click="addPositivePointRow($index)"
+                       ng-if="modified">
+                        <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
+                    </a>
+                </div>
+            </div>
+            <p><strong>Points à améliorer : </strong></p>
+            <ul>
+                <li>{{generalFeeling.pointsToImprove}}</li>
+            </ul>
+        </div>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
+                       ng-if="!modified">
+                <button class="btn btn-success" ng-click="updateGeneralFeelings()" ng-if="modified">Sauvegarder</button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
+
+            </div>
+        </div>
     </uib-tab>
     <uib-tab index="5" heading="{{tabs[5].name}}" disable="tabs[5].disabled">
+        <div ng-repeat="auditReport in auditReports">
+            <h3>Constat {{$index + 1}}</h3>
+            <button class="btn btn-danger" ng-click="delRow(auditReports, $index)" ng-if="modified">Supprimer Constat
+            </button>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label>Norme</label>
+                    <select class="form-control"
+                            ng-options="standard.pk_standards as standard.standard for standard in standards"
+                            ng-model="auditReport.fk_standard" ng-if="modified"></select>
+                    <select class="form-control"
+                            ng-options="standard.pk_standards as standard.standard for standard in standards"
+                            ng-model="auditReport.fk_standard" ng-if="!modified" disabled></select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Interprétation</label>
+                    <select class="form-control"
+                            ng-options="interpretation.pk_interpretation as interpretation.name for interpretation in interpretations"
+                            ng-model="auditReport.fk_interpretation" ng-if="modified"></select>
+                    <select class="form-control"
+                            ng-options="interpretation.pk_interpretation as interpretation.name for interpretation in interpretations"
+                            ng-model="auditReport.fk_interpretation" ng-if="!modified" disabled></select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label>Chapitre</label>
+                    <input type="text" class="form-control"
+                           placeholder="Chapitre"
+                           ng-model="auditReport.chapter"
+                           ng-if="modified">
+                    <input type="text" class="form-control"
+                           placeholder="Chapitre"
+                           ng-model="auditReport.chapter"
+                           ng-if="!modified" disabled>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Description</label>
+                    <textarea class="form-control" ng-model="auditReport.description"
+                              ng-if="modified"></textarea>
+                    <textarea class="form-control" ng-model="auditReport.description"
+                              ng-if="!modified" disabled></textarea>
+                </div>
+            </div>
+            <div ng-show="auditReport.fk_interpretation == 3 || auditReport.fk_interpretation == 4">
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>Délai pour le traitement de la Non-conformité</label>
+                        <input type="text" class="form-control"
+                               placeholder="Délai"
+                               ng-model="auditReport.noncomplianceDelayTreatment"
+                               ng-if="modified">
+                        <input type="text" class="form-control"
+                               placeholder="Délai"
+                               ng-model="auditReport.noncomplianceDelayTreatment"
+                               ng-if="!modified" disabled>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Plan d’action (analyse de la cause et action corrective planifiée)</label>
+                        <input type="text" class="form-control"
+                               placeholder="Plan d’action"
+                               ng-model="auditReport.actionPlan"
+                               ng-if="modified">
+                        <input type="text" class="form-control"
+                               placeholder="Plan d’action"
+                               ng-model="auditReport.actionPlan"
+                               ng-if="!modified" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label>Validation du plan d’action par l’auditeur</label>
+                        <input type="text" class="form-control"
+                               placeholder="Validation du plan d’action par l’auditeur"
+                               ng-model="auditReport.actionPlanValidation"
+                               ng-if="modified">
+                        <input type="text" class="form-control"
+                               placeholder="Validation du plan d’action par l’auditeur"
+                               ng-model="auditReport.actionPlanValidation"
+                               ng-if="!modified" disabled>
+                    </div>
+                    <div class="col-md-1 mb-3">
+                        <label>Validé</label>
+                        <input type="checkbox" class="form-control" ng-checked="auditReport.APVVvalidated"
+                               ng-if="modified">
+                        <input type="checkbox" class="form-control" ng-checked="auditReport.APVVvalidated"
+                               ng-if="!modified"
+                               disabled>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Action corrective réalisée</label>
+                        <textarea class="form-control" ng-model="auditReport.correctiveActionMade"
+                                  ng-if="modified"></textarea>
+                        <textarea class="form-control" ng-model="auditReport.correctiveActionMade"
+                                  ng-if="!modified" disabled></textarea>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Pièce jointe</label>
+                        <div class="input-group" ng-if="modified"><input type="file" class="form-control"
+                                                                         file-model="auditReportAttachements[{{$index}}]"><span
+                                class="input-group-btn" ng-if="auditReport.attachement"><button
+                                class="btn btn-danger"
+                                ng-click="delAuditReportAttachements(auditReport.pk_auditReports, $index)">x</button></span>
+                        </div>
+                        <br>
+                        <a href="{{attachement}}/{{auditReport.attachement}}"
+                           target="_blank" ng-if="auditReport.attachement && !modified">
+                            <ng-md-icon icon="attach_file" style="fill: #2f6ac6"></ng-md-icon>
+                            {{auditReport.attachement}}</a>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-5 mb-3">
+                        <label>Validation de l’action corrective par l’auditeur</label>
+                        <input type="text" class="form-control"
+                               placeholder="Validation de l’action corrective par l’auditeur"
+                               ng-model="auditReport.correctiveActionValidation"
+                               ng-if="modified">
+                        <input type="text" class="form-control"
+                               placeholder="Validation de l’action corrective par l’auditeur"
+                               ng-model="auditReport.correctiveActionValidation"
+                               ng-if="!modified" disabled>
+                    </div>
+                    <div class="col-md-1 mb-3">
+                        <label>Validé</label>
+                        <input type="checkbox" class="form-control" ng-checked="auditReport.CAVValidated"
+                               ng-if="modified">
+                        <input type="checkbox" class="form-control" ng-checked="auditReport.CAVValidated"
+                               ng-if="!modified"
+                               disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
+                       ng-if="!modified">
+                <button class="btn btn-success" ng-click="updateAuditReport()" ng-if="modified">Sauvegarder</button>
+                <button class="btn btn-primary" ng-click="addAuditReport()" ng-if="modified">Nouveau Constat</button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
 
+            </div>
+        </div>
     </uib-tab>
     <uib-tab index="6" heading="{{tabs[6].name}}" disable="tabs[6].disabled">
+        <h3>Conclusion</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col" class="table-conclusion-title" class="table-conclusion-title"
+                    class="table-conclusion-title" class="table-conclusion-title" class="table-conclusion-title">Revue
+                    du système de management de projet
+                </th>
+                <th scope="col" class="table-conclusion-yesno" class="table-conclusion-yesno"
+                    class="table-conclusion-yesno" class="table-conclusion-yesno" class="table-conclusion-yesno">Oui
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="conclusion in conclusionsReview" ng-if="!modified">
+                <td>{{conclusion.title}}</td>
+                <td><input type="checkbox" ng-checked="conclusion.yesno" disabled></td>
+            </tr>
+            <tr ng-repeat="conclusion in conclusionsReview" ng-if="modified">
+                <td>{{conclusion.title}}</td>
+                <td><input type="checkbox" ng-checked="conclusion.yesno"></td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col" class="table-conclusion-title">Commentaire sur l’utilisation de la marque Swiss School
+                    Impulse
+                </th>
+                <th scope="col" class="table-conclusion-yesno">Oui</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="conclusion in conclusionsComments" ng-if="!modified">
+                <td>{{conclusion.title}}</td>
+                <td><input type="checkbox" ng-checked="conclusion.yesno" disabled></td>
+            </tr>
+            <tr ng-repeat="conclusion in conclusionsComments" ng-if="modified">
+                <td>{{conclusion.title}}</td>
+                <td><input type="checkbox" ng-checked="conclusion.yesno"></td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col" class="table-conclusion-title">Conformité du Système</th>
+                <th scope="col" class="table-conclusion-yesno">Oui</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="conclusion in conclusionsCompliance" ng-if="!modified">
+                <td>{{conclusion.title}}</td>
+                <td><input type="checkbox" ng-checked="conclusion.yesno" disabled></td>
+            </tr>
+            <tr ng-repeat="conclusion in conclusionsCompliance" ng-if="modified">
+                <td>{{conclusion.title}}</td>
+                <td><input type="checkbox" ng-checked="conclusion.yesno"></td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col" class="table-conclusion-title">Non-conformité du Système</th>
+                <th scope="col" class="table-conclusion-yesno">Oui</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="conclusion in conclusionsNoncompliance" ng-if="!modified">
+                <td>{{conclusion.title}}</td>
+                <td><input type="checkbox" ng-checked="conclusion.yesno" disabled></td>
+            </tr>
+            <tr ng-repeat="conclusion in conclusionsNoncompliance" ng-if="modified">
+                <td>{{conclusion.title}}</td>
+                <td><input type="checkbox" ng-checked="conclusion.yesno"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label>Éléments à examiner durant le prochain audit</label>
+                <input type="text" class="form-control"
+                       placeholder="Éléments à examiner"
+                       ng-model="conclusion.nextAuditExaminedElement"
+                       ng-if="modified">
+                <input type="text" class="form-control"
+                       placeholder="Éléments à examiner"
+                       ng-model="conclusion.nextAuditExaminedElement"
+                       ng-if="!modified" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label>Date du premier jour du prochain audit</label>
+                <input type="date" class="form-control"
+                       ng-model="conclusion.nextAuditFirstDaysDate"
+                       ng-if="modified">
+                <input type="date" class="form-control"
+                       ng-model="conclusion.nextAuditFirstDaysDate"
+                       ng-if="!modified" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
+                       ng-if="!modified">
+                <button class="btn btn-success" ng-click="updateConclusion()" ng-if="modified">Sauvegarder</button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
 
+            </div>
+        </div>
     </uib-tab>
     <uib-tab index="7" heading="{{tabs[7].name}}" disable="tabs[7].disabled">
+        <h3>Status du rapport</h3>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label>Status</label>
+                <select class="form-control"
+                        ng-options="stat.pk_status as stat.name for stat in status"
+                        ng-model="certificationDecision.fk_status" ng-if="modified"></select>
+                <select class="form-control"
+                        ng-options="stat.pk_status as stat.name for stat in status"
+                        ng-model="certificationDecision.fk_status" ng-if="!modified" disabled></select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Auteur</label>
+                <input type="text" class="form-control"
+                       ng-model="certificationDecision.author"
+                       ng-if="modified">
+                <input type="text" class="form-control"
+                       ng-model="certificationDecision.author"
+                       ng-if="!modified" disabled>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Date</label>
+                <input type="date" class="form-control"
+                       ng-model="certificationDecision.decisionDate"
+                       ng-if="modified">
+                <input type="date" class="form-control"
+                       ng-model="certificationDecision.decisionDate"
+                       ng-if="!modified" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
+                       ng-if="!modified">
+                <button class="btn btn-success" ng-click="updateCertificationDecision()" ng-if="modified">Sauvegarder</button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
 
+            </div>
+        </div>
     </uib-tab>
     <uib-tab index="8" heading="{{tabs[8].name}}" disable="tabs[8].disabled">
+        <h3>Documents</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th ng-if="modified"></th>
+                <th scope="col" class="table-doc-doc">Document</th>
+                <th scope="col" class="table-doc-description">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="document in documents" ng-if="!modified">
+                <td><a href="{{attachement}}/{{document.name}}"
+                       target="_blank" ng-if="document.name && !modified">
+                    <ng-md-icon icon="attach_file" style="fill: #2f6ac6"></ng-md-icon>
+                    {{document.name}}</a></td>
+                <td>{{document.description}}</td>
+            </tr>
+            <tr ng-repeat="document in documents" ng-if="modified">
+                <td><a class="a-remove" ng-click="delRow(documents, $index)">
+                    <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
+                </a></td>
+                <td><input type="file" class="form-control"
+                           file-model="documentsAttachements[{{$index}}]"></td>
+                <td><textarea class="form-control" ng-model="document.description"
+                              ng-if="modified"></textarea></td>
+            </tr>
+            <tr ng-if="modified">
+                <td><a ng-click="addDocument()">
+                    <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
+                </a></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
+                       ng-if="!modified">
+                <button class="btn btn-success" ng-click="updateDocuments()" ng-if="modified">Sauvegarder</button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
 
+            </div>
+        </div>
     </uib-tab>
 </uib-tabset>
