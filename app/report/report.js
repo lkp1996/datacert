@@ -56,11 +56,11 @@ angular.module('myApp.report', ['ngRoute'])
             "auditDates": [
                 {
                     "pk_auditDate": 1,
-                    "auditDate": ""
+                    "auditDate": new Date(1535320800000)
                 },
                 {
                     "pk_auditDate": 2,
-                    "auditDate": ""
+                    "auditDate": new Date(1535320800000)
                 }
             ],
             "organizationChangesSinceLastAudit": "",
@@ -307,39 +307,33 @@ angular.module('myApp.report', ['ngRoute'])
             plans: [
                 {
                     "pk_plan": 1,
-                    "startDate": new Date(),
-                    "endDate": new Date(),
+                    "services": "",
+                    "startDate": new Date(1535320800000),
+                    "endDate": new Date(1535320800000),
                     "place": "",
                     "auditedStaff": "",
-                    "auditedServicesAndProccesses": "",
-                    "standardChapter1": "",
-                    "standardChapter2": "",
-                    "standardChapter3": "",
-                    "auditor": ""
+                    "auditor": "",
+                    "standardChapter": ""
                 },
                 {
                     "pk_plan": 2,
-                    "startDate": new Date(),
-                    "endDate": new Date(),
+                    "services": "",
+                    "startDate": new Date(1535320800000),
+                    "endDate": new Date(1535320800000),
                     "place": "",
                     "auditedStaff": "",
-                    "auditedServicesAndProccesses": "",
-                    "standardChapter1": "",
-                    "standardChapter2": "",
-                    "standardChapter3": "",
-                    "auditor": ""
+                    "auditor": "",
+                    "standardChapter": ""
                 },
                 {
                     "pk_plan": 3,
-                    "startDate": new Date(),
-                    "endDate": new Date(),
+                    "services": "",
+                    "startDate": new Date(1535320800000),
+                    "endDate": new Date(1535320800000),
                     "place": "",
                     "auditedStaff": "",
-                    "auditedServicesAndProccesses": "",
-                    "standardChapter1": "",
-                    "standardChapter2": "",
-                    "standardChapter3": "",
-                    "auditor": ""
+                    "auditor": "",
+                    "standardChapter": ""
                 }
             ]
 
@@ -712,7 +706,7 @@ angular.module('myApp.report', ['ngRoute'])
                 "fk_standard": 1,
                 "fk_interpretation": 1,
                 "chapter": "chapitre 1",
-                "description": "fdsaf fdsa",
+                "description": "",
                 "noncomplianceDelayTreatment": "",
                 "actionPlan": "",
                 "actionPlanValidation": "",
@@ -727,7 +721,7 @@ angular.module('myApp.report', ['ngRoute'])
                 "fk_standard": 2,
                 "fk_interpretation": 3,
                 "chapter": "chapitre 2",
-                "description": "salut asadfafdsf",
+                "description": "",
                 "noncomplianceDelayTreatment": "",
                 "actionPlan": "",
                 "actionPlanValidation": "sdafsdf",
@@ -845,7 +839,7 @@ angular.module('myApp.report', ['ngRoute'])
         $scope.conclusion = {
             "pk_conclusion": 1,
             "nextAuditExaminedElement": "asfasdfasf",
-            "nextAuditFirstDaysDate": new Date()
+            "nextAuditFirstDaysDate": new Date(1535320800000)
         };
 
         $scope.documents = [
@@ -871,7 +865,7 @@ angular.module('myApp.report', ['ngRoute'])
             "pk_certificationDecision": 1,
             "fk_status": 1,
             "author": "Stéphane Perrottet",
-            "decisionDate": new Date()
+            "decisionDate": new Date(1535320800000)
         };
 
         $scope.status = [
@@ -1018,28 +1012,24 @@ angular.module('myApp.report', ['ngRoute'])
             if (!Array.isArray($scope.auditPlan.plans)) {
                 $scope.auditPlan.plans = [{
                     "pk_plan": 0,
-                    "startDate": new Date(),
-                    "endDate": new Date(),
+                    "services": "",
+                    "startDate": new Date(1535320800000),
+                    "endDate": new Date(1535320800000),
                     "place": "",
                     "auditedStaff": "",
-                    "auditedServicesAndProccesses": "",
-                    "standardChapter1": "",
-                    "standardChapter2": "",
-                    "standardChapter3": "",
-                    "auditor": ""
+                    "auditor": "",
+                    "standardChapter": ""
                 }];
             } else {
                 $scope.auditPlan.plans.push({
                     "pk_plan": 0,
-                    "startDate": new Date(),
-                    "endDate": new Date(),
+                    "services": "",
+                    "startDate": new Date(1535320800000),
+                    "endDate": new Date(1535320800000),
                     "place": "",
                     "auditedStaff": "",
-                    "auditedServicesAndProccesses": "",
-                    "standardChapter1": "",
-                    "standardChapter2": "",
-                    "standardChapter3": "",
-                    "auditor": ""
+                    "auditor": "",
+                    "standardChapter": ""
                 });
             }
         };

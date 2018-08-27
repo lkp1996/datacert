@@ -3,14 +3,14 @@
     <uib-tab index="0" heading="{{tabs[0].name}}" disable="tabs[0].disabled">
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Nom de l'organisation du site audité</label>
+                <h5>Nom de l'organisation du site audité</h5>
                 <input type="text" class="form-control" placeholder="Nom" ng-model="organization.name"
                        ng-if="modified">
                 <input type="text" class="form-control" placeholder="Nom" ng-model="organization.name"
                        ng-if="!modified" disabled>
             </div>
         </div>
-        <label>Adresse(s)</label>
+        <h5>Adresse(s)</h5>
         <div class="form-row" ng-repeat="address in organization.addresses">
             <div class="col-md-1 mb-3">
                 <a ng-click="delRow(organization.addresses, $index)"
@@ -19,7 +19,7 @@
                 </a>
             </div>
             <div class="col-md-2 mb-3">
-                <label>NP</label>
+                <h6>NP</h6>
                 <input type="text" class="form-control" placeholder="NP"
                        ng-model="address.np"
                        ng-if="modified">
@@ -28,7 +28,7 @@
                        ng-if="!modified" disabled>
             </div>
             <div class="col-md-3 mb-3">
-                <label>Adresse</label>
+                <h6>Adresse</h6>
                 <input type="text" class="form-control" placeholder="Adresse"
                        ng-model="address.address"
                        ng-if="modified">
@@ -37,7 +37,7 @@
                        ng-if="!modified" disabled>
             </div>
             <div class="col-md-3 mb-3">
-                <label>Localité</label>
+                <h6>Localité</h6>
                 <input type="text" class="form-control" placeholder="Localité"
                        ng-model="address.location"
                        ng-if="modified">
@@ -46,7 +46,7 @@
                        ng-if="!modified" disabled>
             </div>
             <div class="col-md-3 mb-3">
-                <label>Pays</label>
+                <h6>Pays</h6>
                 <input type="text" class="form-control" placeholder="Pays"
                        ng-model="address.country"
                        ng-if="modified">
@@ -65,7 +65,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Email</label>
+                <h5>Email</h5>
                 <input type="email" class="form-control" placeholder="Email" ng-model="organization.email"
                        ng-if="modified">
                 <input type="email" class="form-control" placeholder="Email" ng-model="organization.email"
@@ -74,7 +74,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Téléphone</label>
+                <h5>Téléphone</h5>
                 <input type="tel" class="form-control" placeholder="Téléphone" ng-model="organization.phone"
                        ng-if="modified">
                 <input type="tel" class="form-control" placeholder="Téléphone" ng-model="organization.phone"
@@ -85,7 +85,7 @@
 
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Site web</label>
+                <h5>Site web</h5>
                 <input type="text" class="form-control" placeholder="Site web" ng-model="organization.website"
                        ng-if="modified">
                 <input type="text" class="form-control" placeholder="Site web" ng-model="organization.website"
@@ -94,7 +94,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Branches / Etablissements secondaires / Processus externalisés</label>
+                <h5>Branches / Etablissements secondaires / Processus externalisés</h5>
                 <input type="text" class="form-control"
                        placeholder="Branches / Etablissements secondaires / Processus externalisés"
                        ng-model="organization.branches"
@@ -108,7 +108,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Nom de la personne de contact</label>
+                <h5>Nom de la personne de contact</h5>
                 <input type="text" class="form-control" placeholder="Nom de la personne de contact"
                        ng-model="organization.contactLastName" ng-if="modified">
                 <input type="text" class="form-control" placeholder="Nom de la personne de contact"
@@ -118,7 +118,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Prénom de la personne de contact</label>
+                <h5>Prénom de la personne de contact</h5>
                 <input type="text" class="form-control" placeholder="Prénom de la personne de contact"
                        ng-model="organization.contactFirstName"
                        ng-if="modified">
@@ -128,19 +128,19 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col-md-12 mb-3">
-                <label>Description générale de l'organisation</label>
-                <input type="text" class="form-control" placeholder="Description générale de l'organisation"
-                       ng-model="organization.generalDescription"
-                       ng-if="modified">
-                <input type="text" class="form-control" placeholder="Description générale de l'organisation"
-                       ng-model="organization.generalDescription"
-                       ng-if="!modified" disabled>
+            <div class="col-md-12 mb-3" ng-if="modified">
+                <h5>Description générale de l'organisation</h5>
+                <trix-editor ng-model="organization.generalDescription" angular-trix></trix-editor>
+            </div>
+            <div class="col-md-12 mb-3" ng-if="!modified">
+                <h5>Description générale de l'organisation</h5>
+                <div ng-bind-html="organization.generalDescription" ng-if="organization.generalDescription"></div>
+                <p ng-if="!organization.generalDescription">-</p>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Brève description des processus et produits exclus et justification de l'exclusion</label>
+                <h5>Brève description des processus et produits exclus et justification de l'exclusion</h5>
                 <input type="text" class="form-control"
                        placeholder="Brève description des processus et produits exclus et justification de l'exclusion"
                        ng-model="organization.outsourcedProcessAndProductsDescription" ng-if="modified">
@@ -152,7 +152,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Nom de l'organisation du siège</label>
+                <h5>Nom de l'organisation du siège</h5>
                 <input type="text" class="form-control" placeholder="Nom de l'organisation du siège"
                        ng-model="organization.headquartersName"
                        ng-if="modified">
@@ -163,7 +163,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>NP du siège</label>
+                <h5>NP du siège</h5>
                 <input type="text" class="form-control" placeholder="NP du siège"
                        ng-model="organization.headquartersNP"
                        ng-if="modified">
@@ -174,7 +174,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Adresse du siège</label>
+                <h5>Adresse du siège</h5>
                 <input type="text" class="form-control" placeholder="Adresse du siège"
                        ng-model="organization.headquartersAddress"
                        ng-if="modified">
@@ -185,7 +185,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Localité du siège</label>
+                <h5>Localité du siège</h5>
                 <input type="text" class="form-control" placeholder="Localité du siège"
                        ng-model="organization.headquartersLocation"
                        ng-if="modified">
@@ -197,7 +197,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Nombre total d'employés</label>
+                <h5>Nombre total d'employés</h5>
                 <input type="number" class="form-control" placeholder="Nombre total d'employés"
                        ng-model="organization.employeesNumber"
                        ng-if="modified">
@@ -208,7 +208,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Nombre d'équivalents plein temps</label>
+                <h5>Nombre d'équivalents plein temps</h5>
                 <input type="number" class="form-control" placeholder="Nombre d'équivalents plein temps"
                        ng-model="organization.fullTimeNumber"
                        ng-if="modified">
@@ -218,15 +218,14 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col-md-12 mb-3">
-                <label>Principaux changements au sein du système de management depuis le dernier audit</label>
-                <input type="text" class="form-control"
-                       placeholder="Principaux changements au sein du système de management depuis le dernier audit"
-                       ng-model="organization.changesSinceLastAudit" ng-if="modified">
-                <input type="text" class="form-control"
-                       placeholder="Principaux changements au sein du système de management depuis le dernier audit"
-                       ng-model="organization.changesSinceLastAudit" ng-if="!modified"
-                       disabled>
+            <div class="col-md-12 mb-3" ng-if="modified">
+                <h5>Principaux changements au sein du système de management depuis le dernier audit</h5>
+                <trix-editor ng-model="organization.changesSinceLastAudit" angular-trix></trix-editor>
+            </div>
+            <div class="col-md-12 mb-3" ng-if="!modified">
+                <h5>Principaux changements au sein du système de management depuis le dernier audit</h5>
+                <div ng-bind-html="organization.changesSinceLastAudit" ng-if="organization.changesSinceLastAudit"></div>
+                <p ng-if="!organization.changesSinceLastAudit">-</p>
             </div>
         </div>
         <div class="form-row">
@@ -251,9 +250,18 @@
             <tr ng-repeat="audit in audits" class="clickable-tr">
                 <td ng-click="goTo(audit.pk_audit)">{{audit.reportName}}</td>
                 <td ng-click="goTo(audit.pk_audit)">{{audit.auditDate | date:"dd.MM.yyyy"}}</td>
-                <td><button class="btn btn-dark" ><ng-md-icon icon="picture_as_pdf" style="fill: white"></ng-md-icon></button> </td>
+                <td>
+                    <button class="btn btn-dark">
+                        <ng-md-icon icon="picture_as_pdf" style="fill: white"></ng-md-icon>
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <button class="btn btn-primary" ng-click="newAudit()">Nouvel Audit</button>
+            </div>
+        </div>
     </uib-tab>
 </uib-tabset>

@@ -80,3 +80,31 @@ table-conclusion-yesno {
 .table-doc-description {
     width: 70%;
 }
+
+.table-auditplan-start {
+    width: 15%;
+}
+
+.table-auditplan-end {
+    width: 15%;
+}
+
+.table-auditplan-place {
+    width: 15%;
+}
+
+.table-auditplan-auditedStaff {
+    width: 15%;
+}
+
+.table-auditplan-services {
+    width: 15%;
+}
+
+.table-auditplan-standardChapter {
+    width: 10%;
+}
+
+.table-auditplan-auditor {
+    width: 15%;
+}

@@ -1,8 +1,7 @@
 <h1 class="jumbotron-heading">Raport d'audit</h1>
-
 <uib-tabset active="active">
     <uib-tab index="0" heading="{{tabs[0].name}}" disable="tabs[0].disabled">
-        <label>Date(s) de l’audit</label>
+        <h5>Date(s) de l’audit</h5>
         <div class="form-row" ng-repeat="auditDate in generalInfos.auditDates">
             <div class="col-md-1 mb-3">
                 <a ng-click="delRow(generalInfos.auditDates, $index)"
@@ -11,16 +10,9 @@
                 </a>
             </div>
             <div class="col-md-11 mb-3">
-                <input type="date" class="form-control"
-                       placeholder="Date(s) de l’audit"
-                       ng-model="auditDate.auditDate"
-                       ng-if="modified">
-                <input type="date" class="form-control"
-                       placeholder="Date(s) de l’audit"
-                       ng-model="auditDate.auditDate"
-                       ng-if="!modified" disabled>
+                <input ng-model="auditDate.auditDate" type="date" class="form-control" ng-if="modified"/>
+                <input ng-model="auditDate.auditDate" type="date" class="form-control" ng-if="!modified" disabled/>
             </div>
-
         </div>
         <div class="form-row">
             <div class="col-md-1 mb-3">
@@ -31,22 +23,20 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col-md-12 mb-3">
-                <label>Principaux changements au sein de l'organisation depuis le dernier audit</label>
-                <input type="text" class="form-control"
-                       placeholder="Principaux changements au sein de l'organisation depuis le dernier audit"
-                       ng-model="generalInfos.organizationChangesSinceLastAudit"
-                       ng-if="modified">
-                <input type="text" class="form-control"
-                       placeholder="Principaux changements au sein de l'organisation depuis le dernier audit"
-                       ng-model="generalInfos.organizationChangesSinceLastAudit"
-                       ng-if="!modified" disabled>
+            <div class="col-md-12 mb-3" ng-if="modified">
+                <h5>Principaux changements au sein de l'organisation depuis le dernier audit</h5>
+                <trix-editor ng-model="generalInfos.organizationChangesSinceLastAudit"></trix-editor>
             </div>
-
+            <div class="col-md-12 mb-3" ng-if="!modified">
+                <h5>Principaux changements au sein de l'organisation depuis le dernier audit</h5>
+                <div ng-bind-html="generalInfos.organizationChangesSinceLastAudit"
+                     ng-if="generalInfos.organizationChangesSinceLastAudit"></div>
+                <p ng-if="!generalInfos.organizationChangesSinceLastAudit">-</p>
+            </div>
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Préparation de l’audit</label>
+                <h5>Préparation de l’audit</h5>
                 <input type="text" class="form-control"
                        placeholder="Préparation de l’audit"
                        ng-model="generalInfos.auditPreparation"
@@ -60,7 +50,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Méthode d’audit</label>
+                <h5>Méthode d’audit</h5>
                 <input type="text" class="form-control"
                        placeholder="Méthode d’audit"
                        ng-model="generalInfos.auditMethod"
@@ -74,7 +64,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Norme(s) et version</label>
+                <h5>Norme(s) et version</h5>
                 <input type="text" class="form-control"
                        placeholder="Norme(s) et version"
                        ng-model="generalInfos.standards"
@@ -88,7 +78,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Autres normes certifiées</label>
+                <h5>Autres normes certifiées</h5>
                 <input type="text" class="form-control" placeholder="Autres normes certifiées"
                        ng-model="generalInfos.otherStandards"
                        ng-if="modified">
@@ -99,7 +89,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Type d'audit</label>
+                <h5>Type d'audit</h5>
                 <select class="form-control" ng-if="modified">
                     <option ng-repeat="auditType in generalInfos.auditTypes">{{auditType.type}}</option>
                 </select>
@@ -110,7 +100,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Organisme certificateur</label>
+                <h5>Organisme certificateur</h5>
                 <input type="text" class="form-control"
                        placeholder="Organisme certificateur"
                        ng-model="generalInfos.certificationBody" ng-if="modified">
@@ -122,7 +112,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Type d'audit de l'audit précédent</label>
+                <h5>Type d'audit de l'audit précédent</h5>
                 <select class="form-control" ng-if="modified">
                     <option ng-repeat="lastAuditType in generalInfos.lastAuditTypes">{{lastAuditType.type}}</option>
                 </select>
@@ -133,7 +123,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Principaux changements au sein du système de management depuis le dernier audit</label>
+                <h5>Principaux changements au sein du système de management depuis le dernier audit</h5>
                 <input type="text" class="form-control"
                        placeholder="Principaux changements au sein du système de management depuis le dernier audit"
                        ng-model="generalInfos.managementSystemChangesSinceLastAudit"
@@ -146,7 +136,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Documents de référence</label>
+                <h5>Documents de référence</h5>
                 <input type="text" class="form-control" placeholder="Documents de référence"
                        ng-model="generalInfos.referenceDoc"
                        ng-if="modified">
@@ -158,7 +148,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Fréquence d'audit</label>
+                <h5>Fréquence d'audit</h5>
                 <input type="text" class="form-control" placeholder="Fréquence d'audit"
                        ng-model="generalInfos.auditFrequency"
                        ng-if="modified">
@@ -169,7 +159,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Nombre de jours d'audit</label>
+                <h5>Nombre de jours d'audit</h5>
                 <input type="number" class="form-control" placeholder="Nombre de jours d'audit"
                        ng-model="generalInfos.numberAuditDays"
                        ng-if="modified">
@@ -180,7 +170,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Durée d'audit sur site (h)</label>
+                <h5>Durée d'audit sur site (h)</h5>
                 <input type="text" class="form-control"
                        placeholder="Durée d'audit sur site (h)"
                        ng-model="generalInfos.auditSiteDuration" ng-if="modified">
@@ -192,7 +182,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Périmètre de l’audit</label>
+                <h5>Périmètre de l’audit</h5>
                 <input type="text" class="form-control"
                        placeholder="Périmètre de l’audit"
                        ng-model="generalInfos.auditScope" ng-if="modified">
@@ -204,7 +194,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Produits et activités exclus du périmètre de certification</label>
+                <h5>Produits et activités exclus du périmètre de certification</h5>
                 <input type="number" class="form-control"
                        placeholder="Produits et activités exclus du périmètre de certification"
                        ng-model="generalInfos.excludedProductsAndActivities"
@@ -217,7 +207,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Domaine d’application</label>
+                <h5>Domaine d’application</h5>
                 <input type="text" class="form-control"
                        placeholder="Domaine d’application"
                        ng-model="generalInfos.applicationDomain" ng-if="modified">
@@ -229,7 +219,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Processus ou produits externalisés</label>
+                <h5>Processus ou produits externalisés</h5>
                 <input type="tel" class="form-control" placeholder="Processus ou produits externalisés"
                        ng-model="generalInfos.outsourcedProcessOrProducts"
                        ng-if="modified">
@@ -241,7 +231,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Exclusions de la norme</label>
+                <h5>Exclusions de la norme</h5>
                 <input type="tel" class="form-control" placeholder="Exclusions de la norme"
                        ng-model="generalInfos.standardExclusion"
                        ng-if="modified">
@@ -253,7 +243,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Scope IAF 1</label>
+                <h5>Scope IAF 1</h5>
                 <select class="form-control"
                         ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
                         ng-model="generalInfos.fk_iafScopes1" ng-if="modified"></select>
@@ -264,7 +254,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Scope IAF 2</label>
+                <h5>Scope IAF 2</h5>
                 <select class="form-control"
                         ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
                         ng-model="generalInfos.fk_iafScopes2" ng-if="modified"></select>
@@ -275,7 +265,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Scope IAF 3</label>
+                <h5>Scope IAF 3</h5>
                 <select class="form-control"
                         ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
                         ng-model="generalInfos.fk_iafScopes3" ng-if="modified"></select>
@@ -296,7 +286,7 @@
     <uib-tab index="1" heading="{{tabs[1].name}}" disable="tabs[1].disabled">
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Responsable d'audit</label>
+                <h5>Responsable d'audit</h5>
                 <input type="text" class="form-control"
                        placeholder="Responsable d'audit"
                        ng-model="auditPlan.auditManager"
@@ -307,11 +297,11 @@
                        ng-if="!modified" disabled>
             </div>
         </div>
-        <label>Auditeur(s)</label>
+        <h5>Auditeur(s)</h5>
         <div class="form-row" ng-repeat="auditor in auditPlan.auditors">
             <div class="col-md-1 mb-3">
                 <a ng-click="delRow(auditPlan.auditors, $index)"
-                   ng-if="modified && auditPlan.auditors.length > 1">
+                   ng-if="modified">
                     <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
                 </a>
             </div>
@@ -339,42 +329,40 @@
             <thead>
             <tr>
                 <th ng-if="modified"></th>
-                <th scope="col">Début</th>
-                <th scope="col">Fin</th>
-                <th scope="col">Lieu</th>
-                <th scope="col">Personnel audité</th>
-                <th scope="col">Services et processus audités</th>
-                <th scope="col">Chapitre norme</th>
-                <th scope="col">Chapitre norme</th>
-                <th scope="col">Chapitre norme</th>
-                <th scope="col">Auditeur</th>
+                <th scope="col" class="table-auditplan-services">Services</th>
+                <th scope="col" class="table-auditplan-start">Début</th>
+                <th scope="col" class="table-auditplan-end">Fin</th>
+                <th scope="col" class="table-auditplan-place">Lieu</th>
+                <th scope="col" class="table-auditplan-auditedStaff">Personnel audité</th>
+                <th scope="col" class="table-auditplan-auditor">Auditeur</th>
+                <th scope="col" class="table-auditplan-standardChapter">Chapitre norme</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="plan in auditPlan.plans" ng-if="!modified">
-                <td>{{plan.startDate}}</td>
-                <td>{{plan.endDate}}</td>
+                <td>{{plan.services}}</td>
+                <td>{{plan.startDate | date:'dd.MM.yyyy HH:mm'}}</td>
+                <td>{{plan.endDate | date:'dd.MM.yyyy HH:mm'}}</td>
                 <td>{{plan.place}}</td>
                 <td>{{plan.auditedStaff}}</td>
-                <td>{{plan.auditedServicesAndProccesses}}</td>
-                <td>{{plan.standardChapter1}}</td>
-                <td>{{plan.standardChapter2}}</td>
-                <td>{{plan.standardChapter3}}</td>
                 <td>{{plan.auditor}}</td>
+                <td>{{plan.standardChapter}}</td>
             </tr>
             <tr ng-repeat="plan in auditPlan.plans" ng-if="modified">
                 <td><a class="a-remove" ng-click="delRow(auditPlan.plans, $index)">
                     <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
                 </a></td>
-                <td><input type="datetime-local" class="form-control" ng-model="plan.startDate"></td>
-                <td><input type="datetime-local" class="form-control" ng-model="plan.endDate"></td>
+                <td><input type="text" class="form-control" ng-model="plan.services"></td>
+                <td>
+                    <input ng-model="plan.startDate" type="date" class="form-control"/>
+                    <input type="time" class="form-control" ng-model="plan.startDate" step="60">
+                <td>
+                    <input ng-model="plan.endDate" type="date" class="form-control"/>
+                    <input type="time" class="form-control" ng-model="plan.endDate" step="60">
                 <td><input type="text" class="form-control" ng-model="plan.place"></td>
                 <td><input type="text" class="form-control" ng-model="plan.auditedStaff"></td>
-                <td><input type="text" class="form-control" ng-model="plan.auditedServicesAndProccesses"></td>
-                <td><input type="text" class="form-control" ng-model="plan.standardChapter1"></td>
-                <td><input type="text" class="form-control" ng-model="plan.standardChapter2"></td>
-                <td><input type="text" class="form-control" ng-model="plan.standardChapter3"></td>
                 <td><input type="text" class="form-control" ng-model="plan.auditor"></td>
+                <td><input type="text" class="form-control" ng-model="plan.standardChapter"></td>
             </tr>
             <tr ng-if="modified">
                 <td><a ng-click="addPlanRow()">
@@ -449,7 +437,7 @@
     <uib-tab index="3" heading="{{tabs[3].name}}" disable="tabs[3].disabled">
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Responsable d'audit</label>
+                <h5>Responsable d'audit</h5>
             </div>
             <div class="col-md-6 mb-3">
                 <input type="text" class="form-control"
@@ -472,7 +460,7 @@
                        ng-if="!modified" disabled>
             </div>
         </div>
-        <label>Auditeur(s)</label>
+        <h5>Auditeur(s)</h5>
         <div class="form-row" ng-repeat="auditor in auditors">
             <div class="col-md-1 mb-3">
                 <a ng-click="delRow(auditors, $index)" ng-if="modified">
@@ -615,7 +603,7 @@
             </button>
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <label>Norme</label>
+                    <h5>Norme</h5>
                     <select class="form-control"
                             ng-options="standard.pk_standards as standard.standard for standard in standards"
                             ng-model="auditReport.fk_standard" ng-if="modified"></select>
@@ -624,7 +612,7 @@
                             ng-model="auditReport.fk_standard" ng-if="!modified" disabled></select>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label>Interprétation</label>
+                    <h5>Interprétation</h5>
                     <select class="form-control"
                             ng-options="interpretation.pk_interpretation as interpretation.name for interpretation in interpretations"
                             ng-model="auditReport.fk_interpretation" ng-if="modified"></select>
@@ -635,7 +623,7 @@
             </div>
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <label>Chapitre</label>
+                    <h5>Chapitre</h5>
                     <input type="text" class="form-control"
                            placeholder="Chapitre"
                            ng-model="auditReport.chapter"
@@ -645,18 +633,21 @@
                            ng-model="auditReport.chapter"
                            ng-if="!modified" disabled>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label>Description</label>
-                    <textarea class="form-control" ng-model="auditReport.description"
-                              ng-if="modified"></textarea>
-                    <textarea class="form-control" ng-model="auditReport.description"
-                              ng-if="!modified" disabled></textarea>
+                <div class="col-md-6 mb-3" ng-if="modified">
+                    <h5>Description</h5>
+                    <trix-editor ng-model="auditReport.description" angular-trix
+                                 trix-id="description_{{$index}}"></trix-editor>
+                </div>
+                <div class="col-md-6 mb-3" ng-if="!modified">
+                    <h5>Description</h5>
+                    <div ng-bind-html="auditReport.description" ng-if="auditReport.description"></div>
+                    <p ng-if="!auditReport.description">-</p>
                 </div>
             </div>
             <div ng-show="auditReport.fk_interpretation == 3 || auditReport.fk_interpretation == 4">
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
-                        <label>Délai pour le traitement de la Non-conformité</label>
+                        <h5>Délai pour le traitement de la Non-conformité</h5>
                         <input type="text" class="form-control"
                                placeholder="Délai"
                                ng-model="auditReport.noncomplianceDelayTreatment"
@@ -667,7 +658,7 @@
                                ng-if="!modified" disabled>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label>Plan d’action (analyse de la cause et action corrective planifiée)</label>
+                        <h5>Plan d’action (analyse de la cause et action corrective planifiée)</h5>
                         <input type="text" class="form-control"
                                placeholder="Plan d’action"
                                ng-model="auditReport.actionPlan"
@@ -679,34 +670,38 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                        <label>Validation du plan d’action par l’auditeur</label>
-                        <input type="text" class="form-control"
-                               placeholder="Validation du plan d’action par l’auditeur"
-                               ng-model="auditReport.actionPlanValidation"
-                               ng-if="modified">
-                        <input type="text" class="form-control"
-                               placeholder="Validation du plan d’action par l’auditeur"
-                               ng-model="auditReport.actionPlanValidation"
-                               ng-if="!modified" disabled>
+                    <div class="col-md-4 mb-3" ng-if="modified">
+                        <h5>Validation du plan d’action par l’auditeur</h5>
+                        <trix-editor ng-model="auditReport.actionPlanValidation" angular-trix
+                                     trix-id="validation_{{$index}}"></trix-editor>
+                    </div>
+                    <div class="col-md-4 mb-3" ng-if="!modified">
+                        <h5>Validation du plan d’action par l’auditeur</h5>
+                        <div ng-bind-html="auditReport.actionPlanValidation"
+                             ng-if="auditReport.actionPlanValidation"></div>
+                        <p ng-if="!auditReport.actionPlanValidation">-</p>
                     </div>
                     <div class="col-md-1 mb-3">
-                        <label>Validé</label>
+                        <h5>Validé</h5>
                         <input type="checkbox" class="form-control" ng-checked="auditReport.APVVvalidated"
                                ng-if="modified">
                         <input type="checkbox" class="form-control" ng-checked="auditReport.APVVvalidated"
                                ng-if="!modified"
                                disabled>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label>Action corrective réalisée</label>
-                        <textarea class="form-control" ng-model="auditReport.correctiveActionMade"
-                                  ng-if="modified"></textarea>
-                        <textarea class="form-control" ng-model="auditReport.correctiveActionMade"
-                                  ng-if="!modified" disabled></textarea>
+                    <div class="col-md-4 mb-3" ng-if="modified">
+                        <h5>Action corrective réalisée</h5>
+                        <trix-editor ng-model="auditReport.correctiveActionMade" angular-trix
+                                     trix-id="action_{{$index}}"></trix-editor>
+                    </div>
+                    <div class="col-md-4 mb-3" ng-if="!modified">
+                        <h5>Action corrective réalisée</h5>
+                        <div ng-bind-html="auditReport.correctiveActionMade"
+                             ng-if="auditReport.correctiveActionMade"></div>
+                        <p ng-if="!auditReport.correctiveActionMade">-</p>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label>Pièce jointe</label>
+                        <h5>Pièce jointe</h5>
                         <div class="input-group" ng-if="modified"><input type="file" class="form-control"
                                                                          file-model="auditReportAttachements[{{$index}}]"><span
                                 class="input-group-btn" ng-if="auditReport.attachement"><button
@@ -721,19 +716,19 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-5 mb-3">
-                        <label>Validation de l’action corrective par l’auditeur</label>
-                        <input type="text" class="form-control"
-                               placeholder="Validation de l’action corrective par l’auditeur"
-                               ng-model="auditReport.correctiveActionValidation"
-                               ng-if="modified">
-                        <input type="text" class="form-control"
-                               placeholder="Validation de l’action corrective par l’auditeur"
-                               ng-model="auditReport.correctiveActionValidation"
-                               ng-if="!modified" disabled>
+                    <div class="col-md-4 mb-3" ng-if="modified">
+                        <h5>Validation de l’action corrective par l’auditeur</h5>
+                        <trix-editor ng-model="auditReport.correctiveActionValidation" angular-trix
+                                     trix-id="action_validation_{{$index}}"></trix-editor>
+                    </div>
+                    <div class="col-md-4 mb-3" ng-if="!modified">
+                        <h5>Validation de l’action corrective par l’auditeur</h5>
+                        <div ng-bind-html="auditReport.correctiveActionValidation"
+                             ng-if="auditReport.correctiveActionValidation"></div>
+                        <p ng-if="!auditReport.correctiveActionValidation">-</p>
                     </div>
                     <div class="col-md-1 mb-3">
-                        <label>Validé</label>
+                        <h5>Validé</h5>
                         <input type="checkbox" class="form-control" ng-checked="auditReport.CAVValidated"
                                ng-if="modified">
                         <input type="checkbox" class="form-control" ng-checked="auditReport.CAVValidated"
@@ -837,7 +832,7 @@
         </table>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Éléments à examiner durant le prochain audit</label>
+                <h5>Éléments à examiner durant le prochain audit</h5>
                 <input type="text" class="form-control"
                        placeholder="Éléments à examiner"
                        ng-model="conclusion.nextAuditExaminedElement"
@@ -850,13 +845,10 @@
         </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
-                <label>Date du premier jour du prochain audit</label>
-                <input type="date" class="form-control"
-                       ng-model="conclusion.nextAuditFirstDaysDate"
-                       ng-if="modified">
-                <input type="date" class="form-control"
-                       ng-model="conclusion.nextAuditFirstDaysDate"
-                       ng-if="!modified" disabled>
+                <h5>Date du premier jour du prochain audit</h5>
+                <input ng-model="conclusion.nextAuditFirstDaysDate" type="date" class="form-control" ng-if="modified"/>
+                <input ng-model="conclusion.nextAuditFirstDaysDate" type="date" class="form-control" ng-if="!modified"
+                       disabled/>
             </div>
         </div>
         <div class="form-row">
@@ -873,7 +865,7 @@
         <h3>Status du rapport</h3>
         <div class="form-row">
             <div class="col-md-4 mb-3">
-                <label>Status</label>
+                <h5>Status</h5>
                 <select class="form-control"
                         ng-options="stat.pk_status as stat.name for stat in status"
                         ng-model="certificationDecision.fk_status" ng-if="modified"></select>
@@ -882,7 +874,7 @@
                         ng-model="certificationDecision.fk_status" ng-if="!modified" disabled></select>
             </div>
             <div class="col-md-4 mb-3">
-                <label>Auteur</label>
+                <h5>Auteur</h5>
                 <input type="text" class="form-control"
                        ng-model="certificationDecision.author"
                        ng-if="modified">
@@ -891,7 +883,7 @@
                        ng-if="!modified" disabled>
             </div>
             <div class="col-md-4 mb-3">
-                <label>Date</label>
+                <h5>Date</h5>
                 <input type="date" class="form-control"
                        ng-model="certificationDecision.decisionDate"
                        ng-if="modified">
@@ -904,7 +896,8 @@
             <div class="col-md-12 mb-3">
                 <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
                        ng-if="!modified">
-                <button class="btn btn-success" ng-click="updateCertificationDecision()" ng-if="modified">Sauvegarder</button>
+                <button class="btn btn-success" ng-click="updateCertificationDecision()" ng-if="modified">Sauvegarder
+                </button>
                 <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
 
             </div>
@@ -952,7 +945,6 @@
                        ng-if="!modified">
                 <button class="btn btn-success" ng-click="updateDocuments()" ng-if="modified">Sauvegarder</button>
                 <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
-
             </div>
         </div>
     </uib-tab>

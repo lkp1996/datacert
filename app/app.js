@@ -20,7 +20,9 @@ angular.module('myApp', [
     'ngTouch',
     'ui.bootstrap',
     'ngMdIcons',
-    'lr.upload'
+    'lr.upload',
+    'angularTrix',
+    'ngSanitize'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 

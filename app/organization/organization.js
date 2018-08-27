@@ -92,10 +92,20 @@ angular.module('myApp.organization', ['ngRoute'])
 
         $scope.updateProfile = function () {
             $scope.modified = false;
+            angular.forEach($scope.tabs, function (tab, key) {
+                if ($scope.active != key) {
+                    tab.disabled = false;
+                }
+            });
         };
 
         $scope.updateDetails = function () {
             $scope.modified = false;
+            angular.forEach($scope.tabs, function (tab, key) {
+                if ($scope.active != key) {
+                    tab.disabled = false;
+                }
+            });
         };
 
         $scope.cancel = function () {
