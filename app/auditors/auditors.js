@@ -9,54 +9,23 @@ angular.module('myApp.auditors', ['ngRoute'])
         });
     }])
 
-    .controller('AuditorsCtrl', ['$scope', '$rootScope', '$location', '$http', function ($scope, $rootScope, $location, $http) {
-        $scope.auditors = [
-            {
-                "pk_auditor" : 1,
-                "lastName" : "Berset",
-                "firstName" : "Marie-Aude\t",
-                "phone" : "+41795075783",
-                "email" : "m-a.berset@edelcert.ch",
-                "currentTitle" : "Administratif, Responsable d'audit"
-            },
-            {
-                "pk_auditor" : 2,
-                "lastName" : "Beytrison",
-                "firstName" : "Isabelle",
-                "phone" : "+41793457140",
-                "email" : "i.beytrison@edelcert.ch"
-            },
-            {
-                "pk_auditor" : 3,
-                "lastName" : "Droux",
-                "firstName" : "Alexandra",
-                "phone" : "+41765893049",
-                "email" : "a.droux@edelcert.ch"
-            },
-            {
-                "pk_auditor" : 4,
-                "lastName" : "Fournier",
-                "firstName" : "Patricia",
-                "phone" : "+41797579818",
-                "email" : "p.fournier@edelcert.ch"
-            },
-            {
-                "pk_auditor" : 5,
-                "lastName" : "Gobet",
-                "firstName" : "Jean-Claude",
-                "phone" : "+41269139409",
-                "email" : "j-c.gobet@edelcert.ch"
-            },{
-                "pk_auditor" : 6,
-                "lastName" : "Gremaud",
-                "firstName" : "Nicolas",
-                "phone" : "+41786870478",
-                "email" : "n.gremaud@edelcert.ch"
-            }
-        ];
+    .controller('AuditorsCtrl', ['$scope', '$rootScope', '$location', '$http', 'Constant', function ($scope, $rootScope, $location, $http, Constant) {
+        $scope.auditors = [];
 
-        $scope.goTo = function () {
-            $location.path("/auditor");
+        $scope.goTo = function (id) {
+            $location.path("/auditor/" + id);
+            console.log("/auditor/" + id);
         };
+
+        $scope.getAuditors = function () {
+            //$http.get(Constant.url + "?auditors_list=" + $rootScope.connectedUser.id).then(
+            $http.get(Constant.url + "?auditors_list=1").then(
+                function (data) {
+                    $scope.auditors = data.data;
+                }
+            );
+        };
+
+        $scope.getAuditors();
 
     }]);

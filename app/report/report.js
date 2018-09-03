@@ -3,13 +3,13 @@
 angular.module('myApp.report', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/report', {
+        $routeProvider.when('/report/:reportId', {
             templateUrl: 'report/report.html',
             controller: 'ReportCtrl'
         });
     }])
 
-    .controller('ReportCtrl', ['$scope', '$rootScope', '$location', '$http', 'fileUpload', function ($scope, $rootScope, $location, $http, fileUpload) {
+    .controller('ReportCtrl', ['$scope', '$rootScope', '$location', '$http', 'fileUpload', 'Constant', '$routeParams', function ($scope, $rootScope, $location, $http, fileUpload, Constant, $routeParams) {
         $scope.modified = false;
 
         $scope.tabs = [
@@ -51,233 +51,15 @@ angular.module('myApp.report', ['ngRoute'])
             }
         ];
 
-        $scope.generalInfos = {
-            "pk_details": 1,
-            "auditDates": [
-                {
-                    "pk_auditDate": 1,
-                    "auditDate": new Date(1535320800000)
-                },
-                {
-                    "pk_auditDate": 2,
-                    "auditDate": new Date(1535320800000)
-                }
-            ],
-            "organizationChangesSinceLastAudit": "",
-            "auditPreparation": "",
-            "auditMethod": "",
-            "standards": "",
-            "otherStandards": "",
-            "auditTypes": [
-                {
-                    "pk_auditType": 1,
-                    "type": "type1"
-                },
-                {
-                    "pk_auditType": 2,
-                    "type": "type2"
-                },
-                {
-                    "pk_auditType": 3,
-                    "type": "type3"
-                },
-                {
-                    "pk_auditType": 4,
-                    "type": "type4"
-                }
-            ],
-            "certificationBody": "",
-            "lastAuditTypes": [
-                {
-                    "pk_lastAuditType": 1,
-                    "type": "type1"
-                },
-                {
-                    "pk_lastAuditType": 2,
-                    "type": "type2"
-                },
-                {
-                    "pk_lastAuditType": 3,
-                    "type": "type3"
-                },
-                {
-                    "pk_lastAuditType": 4,
-                    "type": "type4"
-                }
-            ],
-            "managementSystemChangesSinceLastAudit": "",
-            "referenceDoc": "",
-            "auditFrequency": "",
-            "numberAuditDays": "",
-            "auditSiteDuration": "",
-            "auditScope": "",
-            "excludedProductsAndActivities": "",
-            "applicationDomain": "",
-            "outsourcedProcessOrProducts": "",
-            "standardExclusion": "",
-            "fk_iafScopes1": 3,
-            "fk_iafScopes2": 11,
-            "fk_iafScopes3": 39
-        };
+        $scope.generalInfos = {};
 
-        $scope.iafScopes = [
-            {
-                "pk_iafScopes": 1,
-                "name": "Agriculture, Hunting, Forestry & Fishing"
-            },
-            {
-                "pk_iafScopes": 2,
-                "name": "Mining and Quarrying"
-            },
-            {
-                "pk_iafScopes": 3,
-                "name": "Food Products, Beverages and Tobacco"
-            },
-            {
-                "pk_iafScopes": 4,
-                "name": "Textiles and Textile Products"
-            },
-            {
-                "pk_iafScopes": 5,
-                "name": "Leather and Leather Products"
-            },
-            {
-                "pk_iafScopes": 6,
-                "name": "Wood and Wood Products"
-            },
-            {
-                "pk_iafScopes": 7,
-                "name": "Pulp, Paper and Paper Products"
-            },
-            {
-                "pk_iafScopes": 8,
-                "name": "Publishing Companies"
-            },
-            {
-                "pk_iafScopes": 9,
-                "name": "Printing Companies"
-            },
-            {
-                "pk_iafScopes": 10,
-                "name": "Coke and Refined Petroleum Products"
-            },
-            {
-                "pk_iafScopes": 11,
-                "name": "Nuclear Fuel"
-            },
-            {
-                "pk_iafScopes": 12,
-                "name": "Chemicals, Chemical Products and Fibres"
-            },
-            {
-                "pk_iafScopes": 13,
-                "name": "Pharmaceuticals"
-            },
-            {
-                "pk_iafScopes": 14,
-                "name": "Rubber and Plastic Products"
-            },
-            {
-                "pk_iafScopes": 15,
-                "name": "Non-metallic Mineral Products"
-            },
-            {
-                "pk_iafScopes": 16,
-                "name": "Concrete, Cement, Lime, Plaster, etc."
-            },
-            {
-                "pk_iafScopes": 17,
-                "name": "Basic Metals and Fabricated Metal Products"
-            },
-            {
-                "pk_iafScopes": 18,
-                "name": "Machinery and Equipment"
-            },
-            {
-                "pk_iafScopes": 19,
-                "name": "Electrical and Optical Equipment"
-            },
-            {
-                "pk_iafScopes": 20,
-                "name": "Ship Building"
-            },
-            {
-                "pk_iafScopes": 21,
-                "name": "Aerospace"
-            },
-            {
-                "pk_iafScopes": 22,
-                "name": "Other Transport Equipment"
-            },
-            {
-                "pk_iafScopes": 23,
-                "name": "Manufacturing Not Elsewhere Classified"
-            },
-            {
-                "pk_iafScopes": 24,
-                "name": "Recycling"
-            },
-            {
-                "pk_iafScopes": 25,
-                "name": "Electricity Supply"
-            },
-            {
-                "pk_iafScopes": 26,
-                "name": "Gas Supply"
-            },
-            {
-                "pk_iafScopes": 27,
-                "name": "Water Supply"
-            },
-            {
-                "pk_iafScopes": 28,
-                "name": "Construction"
-            },
-            {
-                "pk_iafScopes": 29,
-                "name": "Wholesale and retail trade; repair of motor vehicles, motorcycles and personal and household goods"
-            },
-            {
-                "pk_iafScopes": 30,
-                "name": "Hotels and Restaurants"
-            },
-            {
-                "pk_iafScopes": 31,
-                "name": "Transport, Storage and Communications"
-            },
-            {
-                "pk_iafScopes": 32,
-                "name": "Financial Intermediation, Real Estate, Renting"
-            },
-            {
-                "pk_iafScopes": 33,
-                "name": "Information Technology"
-            },
-            {
-                "pk_iafScopes": 34,
-                "name": "Engineering Services"
-            },
-            {
-                "pk_iafScopes": 35,
-                "name": "Other Services"
-            },
-            {
-                "pk_iafScopes": 36,
-                "name": "Public Administration"
-            },
-            {
-                "pk_iafScopes": 37,
-                "name": "Education"
-            },
-            {
-                "pk_iafScopes": 38,
-                "name": "Health and Social Work"
-            },
-            {
-                "pk_iafScopes": 39,
-                "name": "Other Social Services"
-            }
-        ];
+        $scope.auditDates = [];
+
+        $scope.auditTypes = [];
+
+        $scope.scopes = [];
+
+        $scope.auditScopes = [];
 
         $scope.auditPlan = {
             "pk_auditPlan": 1,
@@ -695,7 +477,7 @@ angular.module('myApp.report', ['ngRoute'])
                 "standard": "PRP Bientraitance 9001"
             },
             {
-                "pk_standards": 11,
+                "pk_standards": 12,
                 "standard": "PRP Service à la personne 9001"
             }
         ];
@@ -882,6 +664,49 @@ angular.module('myApp.report', ['ngRoute'])
         $scope.auditReportAttachements = [];
         $scope.documentsAttachements = [];
 
+        $scope.getReportGeneralInfos = function () {
+            $http.get(Constant.url + "?report_general_infos=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.generalInfos = data.data[0];
+                }
+            );
+        };
+
+        $scope.getAuditDates = function () {
+            $http.get(Constant.url + "?audit_dates=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.auditDates = data.data;
+                    angular.forEach($scope.auditDates, function (auditDate, key) {
+                        auditDate.auditDate = new Date(auditDate.auditDate - 0);
+                    });
+                }
+            );
+        };
+
+        $scope.getAuditTypes = function () {
+            $http.get(Constant.url + "?auditType_list").then(
+                function (data) {
+                    $scope.auditTypes = data.data;
+                }
+            );
+        };
+
+        $scope.getScopes = function () {
+            $http.get(Constant.url + "?scopes").then(
+                function (data) {
+                    $scope.scopes = data.data;
+                }
+            );
+        };
+
+        $scope.getAuditScopes = function () {
+            $http.get(Constant.url + "?audit_scopes=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.auditScopes = data.data;
+                }
+            );
+        };
+
         $scope.modif = function () {
             $scope.modified = true;
             angular.forEach($scope.tabs, function (tab, key) {
@@ -997,6 +822,14 @@ angular.module('myApp.report', ['ngRoute'])
                 $scope.generalInfos.auditDates = [{"pk_auditDate": 0, "auditDate": ""}];
             } else {
                 $scope.generalInfos.auditDates.push({"pk_auditDate": 0, "auditDate": ""});
+            }
+        };
+
+        $scope.addAuditScope = function () {
+            if (!Array.isArray($scope.auditScopes)) {
+                $scope.auditScopes = [{"fk_report": $routeParams.reportId, "fk_scope": "1"}];
+            } else {
+                $scope.auditScopes.push({"fk_report": $routeParams.reportId, "fk_scope": "1"});
             }
         };
 
@@ -1157,4 +990,10 @@ angular.module('myApp.report', ['ngRoute'])
             var uploadUrl = Constant.url;
             fileUpload.uploadFileToUrl(file, uploadUrl, id, type);
         };
+
+        $scope.getReportGeneralInfos();
+        $scope.getAuditDates();
+        $scope.getAuditTypes();
+        $scope.getScopes();
+        $scope.getAuditScopes();
     }]);

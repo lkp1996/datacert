@@ -2,10 +2,10 @@
 <uib-tabset active="active">
     <uib-tab index="0" heading="{{tabs[0].name}}" disable="tabs[0].disabled">
         <h5>Date(s) de l’audit</h5>
-        <div class="form-row" ng-repeat="auditDate in generalInfos.auditDates">
+        <div class="form-row" ng-repeat="auditDate in auditDates">
             <div class="col-md-1 mb-3">
-                <a ng-click="delRow(generalInfos.auditDates, $index)"
-                   ng-if="modified && generalInfos.auditDates.length > 1">
+                <a ng-click="delRow(auditDates, $index)"
+                   ng-if="modified && auditDates.length > 1">
                     <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
                 </a>
             </div>
@@ -25,7 +25,7 @@
         <div class="form-row">
             <div class="col-md-12 mb-3" ng-if="modified">
                 <h5>Principaux changements au sein de l'organisation depuis le dernier audit</h5>
-                <trix-editor ng-model="generalInfos.organizationChangesSinceLastAudit"></trix-editor>
+                <trix-editor ng-model="generalInfos.organizationChangesSinceLastAudit" angular-trix></trix-editor>
             </div>
             <div class="col-md-12 mb-3" ng-if="!modified">
                 <h5>Principaux changements au sein de l'organisation depuis le dernier audit</h5>
@@ -90,12 +90,12 @@
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <h5>Type d'audit</h5>
-                <select class="form-control" ng-if="modified">
-                    <option ng-repeat="auditType in generalInfos.auditTypes">{{auditType.type}}</option>
-                </select>
-                <select class="form-control" ng-if="!modified" disabled>
-                    <option ng-repeat="auditType in generalInfos.auditTypes">{{auditType.type}}</option>
-                </select>
+                <select class="form-control"
+                        ng-options="auditType.pk_auditType as auditType.name for auditType in auditTypes"
+                        ng-model="generalInfos.fk_auditType" ng-if="modified"></select>
+                <select class="form-control"
+                        ng-options="auditType.pk_auditType as auditType.name for auditType in auditTypes"
+                        ng-model="generalInfos.fk_auditType" ng-if="!modified" disabled></select>
             </div>
         </div>
         <div class="form-row">
@@ -113,12 +113,12 @@
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <h5>Type d'audit de l'audit précédent</h5>
-                <select class="form-control" ng-if="modified">
-                    <option ng-repeat="lastAuditType in generalInfos.lastAuditTypes">{{lastAuditType.type}}</option>
-                </select>
-                <select class="form-control" ng-if="!modified" disabled>
-                    <option ng-repeat="lastAuditType in generalInfos.lastAuditTypes">{{lastAuditType.type}}</option>
-                </select>
+                <select class="form-control"
+                        ng-options="auditType.pk_auditType as auditType.name for auditType in auditTypes"
+                        ng-model="generalInfos.fk_last_auditType" ng-if="modified"></select>
+                <select class="form-control"
+                        ng-options="auditType.pk_auditType as auditType.name for auditType in auditTypes"
+                        ng-model="generalInfos.fk_last_auditType" ng-if="!modified" disabled></select>
             </div>
         </div>
         <div class="form-row">
@@ -241,39 +241,26 @@
                        disabled>
             </div>
         </div>
-        <div class="form-row">
+        <div class="form-row" ng-repeat="auditScope in auditScopes">
             <div class="col-md-12 mb-3">
-                <h5>Scope IAF 1</h5>
+                <h5>Scope IAF {{$index + 1}}</h5>
+                <a ng-click="delRow(auditScopes, $index)"
+                   ng-if="modified">
+                    <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
+                </a>
                 <select class="form-control"
-                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
-                        ng-model="generalInfos.fk_iafScopes1" ng-if="modified"></select>
+                        ng-options="scope.pk_scope as scope.pk_scope + ' - ' + scope.name for scope in scopes"
+                        ng-model="auditScope.fk_scope" ng-if="modified"></select>
                 <select class="form-control"
-                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
-                        ng-model="generalInfos.fk_iafScopes1" ng-if="!modified" disabled></select>
+                        ng-options="scope.pk_scope as scope.pk_scope + ' - ' + scope.name for scope in scopes"
+                        ng-model="auditScope.fk_scope" ng-if="!modified" disabled></select>
             </div>
         </div>
-        <div class="form-row">
-            <div class="col-md-12 mb-3">
-                <h5>Scope IAF 2</h5>
-                <select class="form-control"
-                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
-                        ng-model="generalInfos.fk_iafScopes2" ng-if="modified"></select>
-                <select class="form-control"
-                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
-                        ng-model="generalInfos.fk_iafScopes2" ng-if="!modified" disabled></select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-md-12 mb-3">
-                <h5>Scope IAF 3</h5>
-                <select class="form-control"
-                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
-                        ng-model="generalInfos.fk_iafScopes3" ng-if="modified"></select>
-                <select class="form-control"
-                        ng-options="iafScope.pk_iafScopes as iafScope.pk_iafScopes + ' - ' + iafScope.name for iafScope in iafScopes"
-                        ng-model="generalInfos.fk_iafScopes3" ng-if="!modified" disabled></select>
-            </div>
-        </div>
+        <a ng-click="addAuditScope()"
+           ng-if="modified && auditScopes.length < 3">
+            <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
+            ajouter un scope
+        </a>
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
@@ -717,12 +704,12 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-4 mb-3" ng-if="modified">
-                        <h5>Validation de l’action corrective par l’auditeur</h5>
+                        <h5>Validation de l'action corrective par l'auditeur</h5>
                         <trix-editor ng-model="auditReport.correctiveActionValidation" angular-trix
                                      trix-id="action_validation_{{$index}}"></trix-editor>
                     </div>
                     <div class="col-md-4 mb-3" ng-if="!modified">
-                        <h5>Validation de l’action corrective par l’auditeur</h5>
+                        <h5>Validation de l'action corrective par l'auditeur</h5>
                         <div ng-bind-html="auditReport.correctiveActionValidation"
                              ng-if="auditReport.correctiveActionValidation"></div>
                         <p ng-if="!auditReport.correctiveActionValidation">-</p>

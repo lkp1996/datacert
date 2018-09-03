@@ -242,14 +242,12 @@
             <thead>
             <tr>
                 <th scope="col">Rapport</th>
-                <th scope="col">Date</th>
                 <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="audit in audits" class="clickable-tr">
-                <td ng-click="goTo(audit.pk_audit)">{{audit.reportName}}</td>
-                <td ng-click="goTo(audit.pk_audit)">{{audit.auditDate | date:"dd.MM.yyyy"}}</td>
+                <td ng-click="goTo(audit.pk_report)">{{audit.name}}</td>
                 <td>
                     <button class="btn btn-dark">
                         <ng-md-icon icon="picture_as_pdf" style="fill: white"></ng-md-icon>
