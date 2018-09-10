@@ -24,5 +24,22 @@
                    ng-required="true" required>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid">Confirmer</button>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label>Type d'utilisateur</label>
+            <select ng-options="type.pk_userType as type.type for type in typeList" ng-model="auditor.fk_userType"
+                    class="form-control">
+                <option value="">-- Veuillez choisir un type --</option>
+            </select>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Langue</label>
+            <select ng-options="language.pk_language as language.language for language in languages"
+                    ng-model="auditor.fk_language"
+                    class="form-control"><option value="">-- Veuillez choisir une langue --</option></select>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit" ng-click="add()" ng-disabled="form.$invalid">Confirmer</button>
 </form>
+{{auditor}}
+{{typeList}}

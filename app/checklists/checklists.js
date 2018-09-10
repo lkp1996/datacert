@@ -9,64 +9,30 @@ angular.module('myApp.checklists', ['ngRoute'])
         });
     }])
 
-    .controller('ChecklistsCtrl', ['$scope', '$rootScope', '$location', '$http', function ($scope, $rootScope, $location, $http) {
-        $scope.checklists = [
-            {
-                "pk_checklist": 1,
-                "name": "checklist1",
-                "points": [
-                    {
-                        "pk_point": 1,
-                        "point": "point 1"
-                    },
-                    {
-                        "pk_point": 2,
-                        "point": "point 2"
-                    },
-                    {
-                        "pk_point": 3,
-                        "point": "point 3"
-                    },
-                    {
-                        "pk_checklist": 4,
-                        "point": "point 4"
-                    }
-                ]
-            },
-            {
-                "pk_checklist": 2,
-                "name": "checklist2",
-                "points": [
-                    {
-                        "pk_point": 1,
-                        "point": "point 1"
-                    },
-                    {
-                        "pk_point": 2,
-                        "point": "point 2"
-                    }
-                ]
-            }, {
-                "pk_checklist": 3,
-                "name": "checklist3",
-                "points": [
-                    {
-                        "pk_point": 1,
-                        "point": "point 1"
-                    },
-                    {
-                        "pk_point": 2,
-                        "point": "point 2"
-                    },
-                    {
-                        "pk_point": 3,
-                        "point": "point 3"
-                    }
-                ]
-            },
-        ];
+    .controller('ChecklistsCtrl', ['$scope', '$rootScope', '$location', '$http', 'Constant', function ($scope, $rootScope, $location, $http, Constant) {
+        $scope.checklists = [];
 
         $scope.modified = false;
+
+        $scope.getChecklists = function () {
+            console.log("hello");
+            $http.get(Constant.url + "?checklists_names").then(
+                function (data) {
+                    console.log(data.data);
+                    $scope.checklists = data.data;
+                    angular.forEach($scope.checklists, function (checklist, key) {
+                        $http.get(Constant.url + "?checklist_questions_all=" + checklist.pk_checklist).then(
+                            function (data) {
+                                checklist.questions = data.data;
+                                angular.forEach(checklist.questions, function (question, key) {
+                                    question.point = question.point - 0;
+                                });
+                            }
+                        );
+                    });
+                }
+            );
+        };
 
         $scope.modif = function () {
             $scope.modified = true;
@@ -118,5 +84,7 @@ angular.module('myApp.checklists', ['ngRoute'])
                 $scope.checklists.splice(index, 1);
             }
         };
+
+        $scope.getChecklists();
 
     }]);

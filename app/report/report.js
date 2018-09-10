@@ -61,605 +61,49 @@ angular.module('myApp.report', ['ngRoute'])
 
         $scope.auditScopes = [];
 
-        $scope.auditPlan = {
-            "pk_auditPlan": 1,
-            "auditManager": "",
-            "auditors": [
-                {
-                    "pk_auditors": 1,
-                    "name": ""
-                },
-                {
-                    "pk_auditors": 2,
-                    "name": ""
-                },
-                {
-                    "pk_auditors": 3,
-                    "name": ""
-                },
-                {
-                    "pk_auditors": 4,
-                    "name": ""
-                },
-                {
-                    "pk_auditors": 5,
-                    "name": ""
-                }
-            ],
-            plans: [
-                {
-                    "pk_plan": 1,
-                    "services": "",
-                    "startDate": new Date(1535320800000),
-                    "endDate": new Date(1535320800000),
-                    "place": "",
-                    "auditedStaff": "",
-                    "auditor": "",
-                    "standardChapter": ""
-                },
-                {
-                    "pk_plan": 2,
-                    "services": "",
-                    "startDate": new Date(1535320800000),
-                    "endDate": new Date(1535320800000),
-                    "place": "",
-                    "auditedStaff": "",
-                    "auditor": "",
-                    "standardChapter": ""
-                },
-                {
-                    "pk_plan": 3,
-                    "services": "",
-                    "startDate": new Date(1535320800000),
-                    "endDate": new Date(1535320800000),
-                    "place": "",
-                    "auditedStaff": "",
-                    "auditor": "",
-                    "standardChapter": ""
-                }
-            ]
+        $scope.plans = [];
 
-        };
+        $scope.auditManager = {};
 
-        $scope.checklists = [
-            {
-                "pk_checklist": 1,
-                "name": "checklist1",
-                "questions": [
-                    {
-                        "pk_question": 1,
-                        "name": "s’il existe un doute significatif quant à la mise en place d’une maîtrise efficace des processus ou si des produits ou services remplissent les exigences spécifiées;",
-                        "yesno": false,
-                        "comment": "aaaaaaaaaaaaaaaaaaa"
-                    },
-                    {
-                        "pk_question": 2,
-                        "name": "check2",
-                        "yesno": true,
-                        "comment": "fads"
-                    },
-                    {
-                        "pk_question": 3,
-                        "name": "check3",
-                        "yesno": false,
-                        "comment": "wter"
-                    }
-                ]
-            },
-            {
-                "pk_checklist": 2,
-                "name": "checklist2",
-                "questions": [
-                    {
-                        "pk_question": 4,
-                        "name": "check4",
-                        "yesno": true,
-                        "comment": "gfdx"
-                    },
-                    {
-                        "pk_question": 5,
-                        "name": "check5",
-                        "yesno": true,
-                        "comment": "cvby"
-                    },
-                    {
-                        "pk_question": 6,
-                        "name": "check6",
-                        "yesno": false,
-                        "comment": "uztrf"
-                    }
+        $scope.auditors = [];
 
-                ]
-            }
-        ];
+        $scope.checklists = [];
 
-        $scope.otherChecklists = [
-            {
-                "pk_checklist": 3,
-                "name": "checklist3",
-                "questions": [
-                    {
-                        "pk_question": 7,
-                        "name": "check7",
-                        "yesno": false,
-                        "comment": ""
-                    },
-                    {
-                        "pk_question": 8,
-                        "name": "check8",
-                        "yesno": false,
-                        "comment": ""
-                    },
-                    {
-                        "pk_question": 9,
-                        "name": "check9",
-                        "yesno": false,
-                        "comment": ""
-                    }
+        $scope.otherChecklists = [];
 
-                ]
-            },
-            {
-                "pk_checklist": 4,
-                "name": "checklist4",
-                "questions": [
-                    {
-                        "pk_question": 10,
-                        "name": "check10",
-                        "yesno": false,
-                        "comment": ""
-                    },
-                    {
-                        "pk_question": 11,
-                        "name": "check11",
-                        "yesno": false,
-                        "comment": ""
-                    },
-                    {
-                        "pk_question": 12,
-                        "name": "check12",
-                        "yesno": false,
-                        "comment": ""
-                    }
+        $scope.generalFeelingsMS = [];
 
-                ]
-            },
-            {
-                "pk_checklist": 5,
-                "name": "checklist5",
-                "questions": [
-                    {
-                        "pk_question": 13,
-                        "name": "check13",
-                        "yesno": false,
-                        "comment": ""
-                    },
-                    {
-                        "pk_question": 14,
-                        "name": "check14",
-                        "yesno": false,
-                        "comment": ""
-                    },
-                    {
-                        "pk_question": 15,
-                        "name": "check15",
-                        "yesno": false,
-                        "comment": ""
-                    }
+        $scope.generalFeelingsM = [];
 
-                ]
-            }
-        ];
+        $scope.generalFeelingsPerf = [];
 
-        $scope.generalFeelings = [
-            {
-                "pk_generalFeelings": 1,
-                "name": "Impression générale – Système de management, contexte de l’organisation",
-                "positivePoints": [
-                    {
-                        "pk_positivePoints": 1,
-                        "content": "L'analyse du contexte permet d'identifier des pistes d'améliorations et permet de réaliser une veille active par rapport à la concurrence"
-                    },
-                    {
-                        "pk_positivePoints": 2,
-                        "content": "L'analyse des opportunités et des menaces prend en compte les 4 domaines développé dans le référentiel Swiss School Impulse."
-                    },
-                    {
-                        "pk_positivePoints": 3,
-                        "content": "L'organisation du projet réalisée dans un premier temps par une modélisation socio-économique"
-                    }
-                ],
-                "pointsToImprove": "Merci de vous référer aux constats d'audit"
-            },
-            {
-                "pk_generalFeelings": 2,
-                "name": "Impression générale - Management, Leadership et planification",
-                "positivePoints": [
-                    {
-                        "pk_positivePoints": 4,
-                        "content": "La revue de fonctionnement global et les objectifs issus du projet d'établissement"
-                    },
-                    {
-                        "pk_positivePoints": 5,
-                        "content": "Les responsabilités et autorités nécessaires au bon fonctionnement du projet sont clairement explicités"
-                    }
-                ],
-                "pointsToImprove": "Merci de vous référer aux constats d'audit"
-            },
-            {
-                "pk_generalFeelings": 3,
-                "name": "Impression générale – Ressources / support",
-                "positivePoints": [
-                    {
-                        "pk_positivePoints": 6,
-                        "content": "Les ressources nécessaires pour réaliser le projet sont identifiées"
-                    },
-                    {
-                        "pk_positivePoints": 7,
-                        "content": "La réalisation des revues de projet est planifiée afin de s’assurer de la disponibilité de ressources suffisantes pour répondre aux objectifs du projet"
-                    },
-                    {
-                        "pk_positivePoints": 8,
-                        "content": "Les compétences nécessaires en termes de formation initiale et professionnelle, de connaissances et d’expérience pour les membres du personnel travaillant sur les actions liées au projet sont reconnues"
-                    },
-                    {
-                        "pk_positivePoints": 9,
-                        "content": "L'environnement de travail encourage l’excellence et l'efficacité des relations de travail, la confiance, le respect au sein de l’équipe et envers toutes les autres personnes impliquées dans le projet"
-                    }
-                ],
-                "pointsToImprove": "Merci de vous référer aux constats d'audit"
-            },
-            {
-                "pk_generalFeelings": 4,
-                "name": "Impression générale – Réalisation / opérations",
-                "positivePoints": [
-                    {
-                        "pk_positivePoints": 10,
-                        "content": "Les objectifs d'ajustement et de stabilisation des pratiques pédagogique"
-                    },
-                    {
-                        "pk_positivePoints": 11,
-                        "content": "La recherche d'augmentation des compétences individuelles liées à l'utilisation des nouvelles technologies de l'information"
-                    },
-                    {
-                        "pk_positivePoints": 12,
-                        "content": "La clarification des activités clés à mener lors du processus d'admission des élèves."
-                    },
-                    {
-                        "pk_positivePoints": 13,
-                        "content": "Les réflexions en cours concernant la gestion des ressources clés : informatique et finances"
-                    }
-                ],
-                "pointsToImprove": "Merci de vous référer aux constats d'audit"
-            },
-            {
-                "pk_generalFeelings": 5,
-                "name": "Impression générale – Evaluations de la performance / améliorations",
-                "positivePoints": [
-                    {
-                        "pk_positivePoints": 14,
-                        "content": "Le suivi des améliorations au quotidien fait partie de la culture de l'établissement"
-                    },
-                    {
-                        "pk_positivePoints": 15,
-                        "content": "Les séances administratives et pédagogiques qui permettent favorise la concertation et les aspects décisionnels"
-                    }
-                ],
-                "pointsToImprove": "Merci de vous référer aux constats d'audit"
-            }
-        ];
+        $scope.generalFeelingsProd = [];
 
-        $scope.leadAuditor = {
-            "pk_leadAuditor": 1,
-            "lastName": "Perrottet",
-            "firstName": "Stéphane"
-        };
+        $scope.generalFeelingsRess = [];
 
-        $scope.auditors = [
-            {
-                "pk_auditor": 1,
-                "lastName": "auditor1",
-                "firstName": "auditor1"
-            },
-            {
-                "pk_auditor": 2,
-                "lastName": "auditor2",
-                "firstName": "auditor2"
-            },
-            {
-                "pk_auditor": 3,
-                "lastName": "auditor3",
-                "firstName": "auditor3"
-            }
-        ];
+        $scope.auditedPeople = [];
 
-        $scope.auditedPeople = [
-            {
-                "pk_auditedPeople": 1,
-                "lastName": "auditedPeople1",
-                "firstName": "auditedPeople1",
-                "function": "function",
-                "openingMeeting": false,
-                "onSiteAudit": true,
-                "closingMeeting": false
-            },
-            {
-                "pk_auditedPeople": 2,
-                "lastName": "auditedPeople2",
-                "firstName": "auditedPeople2",
-                "function": "function",
-                "openingMeeting": true,
-                "onSiteAudit": true,
-                "closingMeeting": true
-            },
-            {
-                "pk_auditedPeople": 3,
-                "lastName": "auditedPeople3",
-                "firstName": "auditedPeople3",
-                "function": "function",
-                "openingMeeting": true,
-                "onSiteAudit": false,
-                "closingMeeting": true
-            },
-            {
-                "pk_auditedPeople": 4,
-                "lastName": "auditedPeople4",
-                "firstName": "auditedPeople4",
-                "function": "function",
-                "openingMeeting": true,
-                "onSiteAudit": true,
-                "closingMeeting": false
-            }
-        ];
+        $scope.interpretations = [];
 
-        $scope.interpretations = [
-            {
-                "pk_interpretation": 1,
-                "name": "Recommandation"
-            },
-            {
-                "pk_interpretation": 2,
-                "name": "Piste de progrès"
-            },
-            {
-                "pk_interpretation": 3,
-                "name": "Non-Conformité mineure"
-            },
-            {
-                "pk_interpretation": 4,
-                "name": "Non-Conformité majeure"
-            }
-        ];
+        $scope.standards = [];
 
-        $scope.standards = [
-            {
-                "pk_standards": 1,
-                "standard": "ISO 9001 : 2015"
-            },
-            {
-                "pk_standards": 2,
-                "standard": "ISO 14001 : 2015"
-            },
-            {
-                "pk_standards": 3,
-                "standard": "ISO 45001 : 2018"
-            },
-            {
-                "pk_standards": 4,
-                "standard": "ISO 29990 : 2011"
-            },
-            {
-                "pk_standards": 5,
-                "standard": "ISO 21001 : 2018"
-            },
-            {
-                "pk_standards": 6,
-                "standard": "QuaTheDA : 2012"
-            },
-            {
-                "pk_standards": 7,
-                "standard": "EcoEntreprise : 2013"
-            },
-            {
-                "pk_standards": 8,
-                "standard": "Swiss School Impulse : 2015"
-            },
-            {
-                "pk_standards": 9,
-                "standard": "CLASS"
-            },
-            {
-                "pk_standards": 10,
-                "standard": "Entreprise Citoyenne 9001-14001-45001"
-            },
-            {
-                "pk_standards": 11,
-                "standard": "PRP Bientraitance 9001"
-            },
-            {
-                "pk_standards": 12,
-                "standard": "PRP Service à la personne 9001"
-            }
-        ];
+        $scope.auditReports = [];
 
-        $scope.auditReports = [
-            {
-                "pk_auditReports": 1,
-                "fk_standard": 1,
-                "fk_interpretation": 1,
-                "chapter": "chapitre 1",
-                "description": "",
-                "noncomplianceDelayTreatment": "",
-                "actionPlan": "",
-                "actionPlanValidation": "",
-                "APVVvalidated": false,
-                "correctiveActionMade": "",
-                "attachement": "",
-                "correctiveActionValidation": "",
-                "CAVValidated": false
-            },
-            {
-                "pk_auditReports": 2,
-                "fk_standard": 2,
-                "fk_interpretation": 3,
-                "chapter": "chapitre 2",
-                "description": "",
-                "noncomplianceDelayTreatment": "",
-                "actionPlan": "",
-                "actionPlanValidation": "sdafsdf",
-                "APVVvalidated": true,
-                "correctiveActionMade": "",
-                "attachement": "asdf.txt",
-                "correctiveActionValidation": "",
-                "CAVValidated": true
-            }
-        ];
+        $scope.conclusionsReview = [];
 
-        $scope.conclusionsReview = [
-            {
-                "pk_conclusionsReview": 1,
-                "title": "Le système de management de projet intègre-t-il les exigences des référentiels audités ?",
-                "yesno": true
-            },
-            {
-                "pk_conclusionsReview": 2,
-                "title": "Le système de management de projet est-il effectivement mis en place et entretenu ?",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsReview": 3,
-                "title": "L’organisme a-t-il mis en place des objectifs mesurables et cohérents avec sa politique",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsReview": 4,
-                "title": "Les évaluations internes participent-elles à l’amélioration effective du système de management ?",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsReview": 5,
-                "title": "La revue de projet permet-elle d’assurer que le système est efficace et conforme aux référentiels",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsReview": 6,
-                "title": "La formation et la sensibilisation des personnels sont-elles entretenues ?",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsReview": 7,
-                "title": "Des dispositions pour maîtriser la qualité des services sont-elles mises en oeuvre ?",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsReview": 8,
-                "title": "L’amélioration continue est-elle effective ?",
-                "yesno": false
-            }
-        ];
+        $scope.conclusionsComments = [];
 
-        $scope.conclusionsComments = [
-            {
-                "pk_conclusionsComments": 1,
-                "title": "Le client utilise le droit d'usage de la marque de certification",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsComments": 2,
-                "title": "L’organisme utilise la marque d’une façon qui paraît claire et sincère",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsComments": 3,
-                "title": "L’organisme respecte le règlement d'usage de la marque de certification",
-                "yesno": false
-            }
-        ];
+        $scope.conclusionsCompliance = [];
 
-        $scope.conclusionsCompliance = [
-            {
-                "pk_conclusionsCompliance": 1,
-                "title": "Certification initiale immédiate",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsCompliance": 2,
-                "title": "Maintien du certificat",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsCompliance": 3,
-                "title": "Renouvellement du certificat\n" +
-                "Organisation d’un audit anticipé",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsCompliance": 4,
-                "title": "Audit documentaire par l’OC",
-                "yesno": false
-            }
-        ];
+        $scope.conclusionsNoncompliance = [];
 
-        $scope.conclusionsNoncompliance = [
-            {
-                "pk_conclusionsNoncompliance": 1,
-                "title": "Audit complémentaire",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsNoncompliance": 2,
-                "title": "Suspension du certificat",
-                "yesno": false
-            },
-            {
-                "pk_conclusionsNoncompliance": 3,
-                "title": "Retrait du certificat",
-                "yesno": false
-            }
-        ];
+        $scope.conclusion = {};
 
-        $scope.conclusion = {
-            "pk_conclusion": 1,
-            "nextAuditExaminedElement": "asfasdfasf",
-            "nextAuditFirstDaysDate": new Date(1535320800000)
-        };
+        $scope.documents = [];
 
-        $scope.documents = [
-            {
-                "pk_documents": 1,
-                "name": "doc1.docx",
-                "description": "asdfasf safdlakdsf sadf\nasfdaflsdf"
-            },
-            {
-                "pk_documents": 2,
-                "name": "doc2.txt",
-                "description": "fasfsdaf\nsadf\nsapjsadf\nfffaaewrzrtuigf"
-            },
-            {
-                "pk_documents": 3,
-                "name": "doc3.pdf",
-                "description": "asfdf"
-            }
+        $scope.certificationDecision = {};
 
-        ];
-
-        $scope.certificationDecision = {
-            "pk_certificationDecision": 1,
-            "fk_status": 1,
-            "author": "Stéphane Perrottet",
-            "decisionDate": new Date(1535320800000)
-        };
-
-        $scope.status = [
-            {
-                "pk_status": 1,
-                "name": "en cours"
-            },
-            {
-                "pk_status": 2,
-                "name": "fermé"
-            }
-        ];
+        $scope.status = [];
 
         $scope.auditReportAttachements = [];
         $scope.documentsAttachements = [];
@@ -703,6 +147,194 @@ angular.module('myApp.report', ['ngRoute'])
             $http.get(Constant.url + "?audit_scopes=" + $routeParams.reportId).then(
                 function (data) {
                     $scope.auditScopes = data.data;
+                }
+            );
+        };
+
+        $scope.getPlan = function () {
+            $http.get(Constant.url + "?auditPlan_plan=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.plans = data.data;
+                }
+            );
+        };
+
+        $scope.getAuditManager = function () {
+            $http.get(Constant.url + "?auditPlan_auditManager=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.auditManager = data.data[0];
+                }
+            );
+        };
+
+        $scope.getAuditors = function () {
+            $http.get(Constant.url + "?auditPlan_auditors_list=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.auditors = data.data;
+                }
+            );
+        };
+
+        $scope.getChecklists = function () {
+            $http.get(Constant.url + "?checklist_names=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.checklists = data.data;
+                    angular.forEach($scope.checklists, function (checklist, key) {
+                        $http.get(Constant.url + "?report_checklist_questions=" + checklist.pk_report_checklist).then(
+                            function (data) {
+                                checklist.questions = data.data;
+                            }
+                        );
+                    });
+                }
+            );
+        };
+
+        $scope.getOtherChecklists = function () {
+            $http.get(Constant.url + "?other_checklist_names=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.otherChecklists = data.data;
+                }
+            );
+        };
+
+        $scope.getAuditedPeople = function () {
+            $http.get(Constant.url + "?auditedPeople_list=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.auditedPeople = data.data;
+                    angular.forEach($scope.auditedPeople, function (auditedPerson, key) {
+                        auditedPerson.auditDate = new Date(auditedPerson.auditDate - 0);
+                    });
+                }
+            );
+        };
+
+        $scope.getGeneralFeelingsManagementSystem = function () {
+            $http.get(Constant.url + "?generalFeelingManagementSystem=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.generalFeelingsMS = data.data;
+                }
+            );
+        };
+
+        $scope.getGeneralFeelingsManagement = function () {
+            $http.get(Constant.url + "?generalFeelingManagement=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.generalFeelingsM = data.data;
+                }
+            );
+        };
+
+        $scope.getGeneralFeelingsPerformance = function () {
+            $http.get(Constant.url + "?generalFeelingPerformance=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.generalFeelingsPerf = data.data;
+                }
+            );
+        };
+
+        $scope.getGeneralFeelingsProduction = function () {
+            $http.get(Constant.url + "?generalFeelingProduction=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.generalFeelingsProd = data.data;
+                }
+            );
+        };
+
+        $scope.getGeneralFeelingsRessource = function () {
+            $http.get(Constant.url + "?generalFeelingRessource=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.generalFeelingsRess = data.data;
+                }
+            );
+        };
+
+        $scope.getAuditReports = function () {
+            $http.get(Constant.url + "?auditReports_list=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.auditReports = data.data;
+                }
+            );
+        };
+
+        $scope.getStandards = function () {
+            $http.get(Constant.url + "?standards").then(
+                function (data) {
+                    $scope.standards = data.data;
+                }
+            );
+        };
+
+        $scope.getInterpretation = function () {
+            $http.get(Constant.url + "?interpretations").then(
+                function (data) {
+                    $scope.interpretations = data.data;
+                }
+            );
+        };
+
+        $scope.getConclusion = function () {
+            $http.get(Constant.url + "?conclusion=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.conclusion = data.data[0];
+                    $scope.conclusion.nextAuditFirstDaysDate = new Date($scope.conclusion.nextAuditFirstDaysDate - 0);
+                }
+            );
+        };
+
+        $scope.getConclusionComment = function () {
+            $http.get(Constant.url + "?conclusionComments=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.conclusionsComments = data.data;
+                }
+            );
+        };
+
+        $scope.getConclusionCompliance = function () {
+            $http.get(Constant.url + "?conclusionCompliance=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.conclusionsCompliance = data.data;
+                }
+            );
+        };
+
+        $scope.getConclusionNoncompliance = function () {
+            $http.get(Constant.url + "?conclusionNoncompliance=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.conclusionsNoncompliance = data.data;
+                }
+            );
+        };
+
+        $scope.getConclusionReview = function () {
+            $http.get(Constant.url + "?conclusionReview=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.conclusionsReview = data.data;
+                }
+            );
+        };
+
+        $scope.getCertificationDecision = function () {
+            $http.get(Constant.url + "?certificationDecision=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.certificationDecision = data.data[0];
+                    $scope.certificationDecision.decisionDate = new Date($scope.certificationDecision.decisionDate - 0);
+                }
+            );
+        };
+
+        $scope.getStatus = function () {
+            $http.get(Constant.url + "?status_list").then(
+                function (data) {
+                    $scope.status = data.data;
+                }
+            );
+        };
+
+        $scope.getDocuments = function () {
+            $http.get(Constant.url + "?variousDocuments=" + $routeParams.reportId).then(
+                function (data) {
+                    $scope.documents = data.data;
                 }
             );
         };
@@ -867,15 +499,15 @@ angular.module('myApp.report', ['ngRoute'])
             }
         };
 
-        $scope.addPositivePointRow = function (index) {
-            if (!Array.isArray($scope.generalFeelings[index].positivePoints)) {
-                $scope.generalFeelings[index].positivePoints = [{
-                    "pk_positivePoints": 0,
+        $scope.addPositivePointMSRow = function (index) {
+            if (!Array.isArray($scope.generalFeelingsMS)) {
+                $scope.generalFeelingsMS = [{
+                    "pk_generalFeelingManagementSystem": 0,
                     "content": ""
                 }];
             } else {
-                $scope.generalFeelings[index].positivePoints.push({
-                    "pk_positivePoints": 0,
+                $scope.generalFeelingsMS.push({
+                    "pk_generalFeelingManagementSystem": 0,
                     "content": ""
                 });
             }
@@ -996,4 +628,26 @@ angular.module('myApp.report', ['ngRoute'])
         $scope.getAuditTypes();
         $scope.getScopes();
         $scope.getAuditScopes();
+        $scope.getPlan();
+        $scope.getAuditManager();
+        $scope.getAuditors();
+        $scope.getAuditedPeople();
+        $scope.getChecklists();
+        $scope.getOtherChecklists();
+        $scope.getGeneralFeelingsManagementSystem();
+        $scope.getGeneralFeelingsManagement();
+        $scope.getGeneralFeelingsPerformance();
+        $scope.getGeneralFeelingsProduction();
+        $scope.getGeneralFeelingsRessource();
+        $scope.getAuditReports();
+        $scope.getStandards();
+        $scope.getInterpretation();
+        $scope.getConclusion();
+        $scope.getConclusionComment();
+        $scope.getConclusionCompliance();
+        $scope.getConclusionNoncompliance();
+        $scope.getConclusionReview();
+        $scope.getStatus();
+        $scope.getCertificationDecision();
+        $scope.getDocuments();
     }]);

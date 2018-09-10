@@ -274,32 +274,54 @@
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <h5>Responsable d'audit</h5>
+            </div>
+            <div class="col-md-6 mb-3">
                 <input type="text" class="form-control"
-                       placeholder="Responsable d'audit"
-                       ng-model="auditPlan.auditManager"
+                       placeholder="Nom"
+                       ng-model="auditManager.lastName"
                        ng-if="modified">
                 <input type="text" class="form-control"
-                       placeholder="Responsable d'audit"
-                       ng-model="auditPlan.auditManager"
+                       placeholder="Nom"
+                       ng-model="auditManager.lastName"
+                       ng-if="!modified" disabled>
+            </div>
+            <div class="col-md-6 mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Prénom"
+                       ng-model="auditManager.firstName"
+                       ng-if="modified">
+                <input type="text" class="form-control"
+                       placeholder="Prénom"
+                       ng-model="auditManager.firstName"
                        ng-if="!modified" disabled>
             </div>
         </div>
         <h5>Auditeur(s)</h5>
-        <div class="form-row" ng-repeat="auditor in auditPlan.auditors">
+        <div class="form-row" ng-repeat="auditor in auditors">
             <div class="col-md-1 mb-3">
-                <a ng-click="delRow(auditPlan.auditors, $index)"
+                <a ng-click="delRow(auditors, $index)"
                    ng-if="modified">
                     <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
                 </a>
             </div>
-            <div class="col-md-11 mb-3">
+            <div class="col-md-6 mb-3">
                 <input type="text" class="form-control"
                        placeholder="Nom"
-                       ng-model="auditor.name"
+                       ng-model="auditor.lastName"
                        ng-if="modified">
                 <input type="text" class="form-control"
                        placeholder="Nom"
-                       ng-model="auditor.name"
+                       ng-model="auditor.lastName"
+                       ng-if="!modified" disabled>
+            </div>
+            <div class="col-md-5 mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Prénom"
+                       ng-model="auditor.firstName"
+                       ng-if="modified">
+                <input type="text" class="form-control"
+                       placeholder="Prénom"
+                       ng-model="auditor.firstName"
                        ng-if="!modified" disabled>
             </div>
 
@@ -326,16 +348,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="plan in auditPlan.plans" ng-if="!modified">
+            <tr ng-repeat="plan in plans" ng-if="!modified">
                 <td>{{plan.services}}</td>
                 <td>{{plan.startDate | date:'dd.MM.yyyy HH:mm'}}</td>
                 <td>{{plan.endDate | date:'dd.MM.yyyy HH:mm'}}</td>
                 <td>{{plan.place}}</td>
                 <td>{{plan.auditedStaff}}</td>
-                <td>{{plan.auditor}}</td>
+                <td>{{plan.lastName}} {{plan.firstName}}</td>
                 <td>{{plan.standardChapter}}</td>
             </tr>
-            <tr ng-repeat="plan in auditPlan.plans" ng-if="modified">
+            <tr ng-repeat="plan in plans" ng-if="modified">
                 <td><a class="a-remove" ng-click="delRow(auditPlan.plans, $index)">
                     <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
                 </a></td>
@@ -378,32 +400,35 @@
         </div>
     </uib-tab>
     <uib-tab index="2" heading="{{tabs[2].name}}" disable="tabs[2].disabled">
-        <table class="table table-striped" ng-repeat="checklist in checklists">
-            <thead>
-            <tr>
-                <th class="table-check-question">Questions</th>
-                <th class="table-check-yes">OUI</th>
-                <th class="table-check-comment">Remarques</th>
-                <th ng-if="modified">
-                    <button class="btn btn-danger" ng-click="delChecklist($index)">Retirer Checklist</button>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="question in checklist.questions" ng-if="!modified">
-                <td>{{question.name}}</td>
-                <td><input type="checkbox" ng-checked="question.yesno" disabled></td>
-                <td>{{question.comment}}</td>
-                <td ng-if="modified"></td>
-            </tr>
-            <tr ng-repeat="question in checklist.questions" ng-if="modified">
-                <td>{{question.name}}</td>
-                <td><input type="checkbox" ng-model="question.yesno"></td>
-                <td><input type="text" class="form-control" ng-model="question.comment"></td>
-                <td ng-if="modified"></td>
-            </tr>
-            </tbody>
-        </table>
+        <div ng-repeat="checklist in checklists">
+            <h3>{{checklist.name}}</h3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="table-check-question">Questions</th>
+                    <th class="table-check-yes">OUI</th>
+                    <th class="table-check-comment">Remarques</th>
+                    <th ng-if="modified">
+                        <button class="btn btn-danger" ng-click="delChecklist($index)">Retirer Checklist</button>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="question in checklist.questions" ng-if="!modified">
+                    <td>{{question.question}}</td>
+                    <td><input type="checkbox" ng-checked="question.yes" disabled></td>
+                    <td>{{question.comment}}</td>
+                    <td ng-if="modified"></td>
+                </tr>
+                <tr ng-repeat="question in checklist.questions" ng-if="modified">
+                    <td>{{question.question}}</td>
+                    <td><input type="checkbox" ng-checked="question.yes"></td>
+                    <td><input type="text" class="form-control" ng-model="question.comment"></td>
+                    <td ng-if="modified"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
@@ -429,21 +454,21 @@
             <div class="col-md-6 mb-3">
                 <input type="text" class="form-control"
                        placeholder="Nom"
-                       ng-model="leadAuditor.lastName"
+                       ng-model="auditManager.lastName"
                        ng-if="modified">
                 <input type="text" class="form-control"
                        placeholder="Nom"
-                       ng-model="leadAuditor.lastName"
+                       ng-model="auditManager.lastName"
                        ng-if="!modified" disabled>
             </div>
             <div class="col-md-6 mb-3">
                 <input type="text" class="form-control"
                        placeholder="Prénom"
-                       ng-model="leadAuditor.firstName"
+                       ng-model="auditManager.firstName"
                        ng-if="modified">
                 <input type="text" class="form-control"
                        placeholder="Prénom"
-                       ng-model="leadAuditor.firstName"
+                       ng-model="auditManager.firstName"
                        ng-if="!modified" disabled>
             </div>
         </div>
@@ -496,7 +521,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="auditedPerson in auditedPeople" ng-if="!modified">
-                <td>{{auditedPerson.lastName}} {{auditedPerson.firstName}}</td>
+                <td>{{auditedPerson.auditedPeople}}</td>
                 <td>{{auditedPerson.function}}</td>
                 <td><input type="checkbox" ng-checked="auditedPerson.openingMeeting" disabled></td>
                 <td><input type="checkbox" ng-checked="auditedPerson.onSiteAudit" disabled></td>
@@ -506,8 +531,7 @@
                 <td><a class="a-remove" ng-click="delRow(auditedPeople, $index)">
                     <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
                 </a></td>
-                <td><input type="text" class="form-control" ng-model="auditedPerson.lastName" placeholder="Nom">
-                    <input type="text" class="form-control" ng-model="auditedPerson.firstName" placeholder="Prénom">
+                <td><input type="text" class="form-control" ng-model="auditedPerson.auditedPeople" placeholder="Nom">
                 </td>
                 <td><input type="text" class="form-control" ng-model="auditedPerson.function" placeholder="Fonction">
                 </td>
@@ -540,39 +564,161 @@
         </div>
     </uib-tab>
     <uib-tab index="4" heading="{{tabs[4].name}}" disable="tabs[4].disabled">
-        <div ng-repeat="generalFeeling in generalFeelings">
-            <h3>{{generalFeeling.name}}</h3>
-            <p><strong>Points positifs : </strong></p>
-            <ul ng-if="!modified">
-                <li ng-repeat="positivePoint in generalFeeling.positivePoints">{{positivePoint.content}}</li>
-            </ul>
-            <div class="form-row" ng-repeat="positivePoint in generalFeeling.positivePoints" ng-if="modified">
-                <div class="col-md-1 mb-3">
-                    <a ng-click="delRow(generalFeeling.positivePoints, $index)">
-                        <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
-                    </a>
-                </div>
-                <div class="col-md-11 mb-3">
-                    <input type="text" class="form-control"
-                           placeholder="Point positif"
-                           ng-model="positivePoint.content"
-                           ng-if="modified">
-                </div>
-
+        <h3>Impression générale – Système de management, contexte de l’organisation</h3>
+        <p><strong>Points positifs : </strong></p>
+        <ul ng-if="!modified">
+            <li ng-repeat="generalFeelingMS in generalFeelingsMS">{{generalFeelingMS.content}}</li>
+        </ul>
+        <div class="form-row" ng-repeat="generalFeelingMS in generalFeelingsMS" ng-if="modified">
+            <div class="col-md-1 mb-3">
+                <a ng-click="delRow(generalFeelingMS, $index)">
+                    <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
+                </a>
             </div>
-            <div class="form-row">
-                <div class="col-md-1 mb-3">
-                    <a ng-click="addPositivePointRow($index)"
+            <div class="col-md-11 mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Point positif"
+                       ng-model="generalFeelingMS.content"
                        ng-if="modified">
-                        <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
-                    </a>
-                </div>
             </div>
-            <p><strong>Points à améliorer : </strong></p>
-            <ul>
-                <li>{{generalFeeling.pointsToImprove}}</li>
-            </ul>
+
         </div>
+        <div class="form-row">
+            <div class="col-md-1 mb-3">
+                <a ng-click="addPositivePointMSRow($index)"
+                   ng-if="modified">
+                    <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
+                </a>
+            </div>
+        </div>
+        <p><strong>Points à améliorer : </strong></p>
+        <ul>
+            <li>Merci de vous référer aux constats d'audit</li>
+        </ul>
+        <h3>Impression générale - Management, Leadership et planification</h3>
+        <p><strong>Points positifs : </strong></p>
+        <ul ng-if="!modified">
+            <li ng-repeat="generalFeelingM in generalFeelingsM">{{generalFeelingM.content}}</li>
+        </ul>
+        <div class="form-row" ng-repeat="generalFeelingM in generalFeelingsM" ng-if="modified">
+            <div class="col-md-1 mb-3">
+                <a ng-click="delRow(generalFeelingsM, $index)">
+                    <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
+                </a>
+            </div>
+            <div class="col-md-11 mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Point positif"
+                       ng-model="generalFeelingM.content"
+                       ng-if="modified">
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="col-md-1 mb-3">
+                <a ng-click="addPositivePointMRow($index)"
+                   ng-if="modified">
+                    <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
+                </a>
+            </div>
+        </div>
+        <p><strong>Points à améliorer : </strong></p>
+        <ul>
+            <li>Merci de vous référer aux constats d'audit</li>
+        </ul>
+        <h3>Impression générale – Ressources / support</h3>
+        <p><strong>Points positifs : </strong></p>
+        <ul ng-if="!modified">
+            <li ng-repeat="generalFeelingRess in generalFeelingsRess">{{generalFeelingRess.content}}</li>
+        </ul>
+        <div class="form-row" ng-repeat="generalFeelingRess in generalFeelingsRess" ng-if="modified">
+            <div class="col-md-1 mb-3">
+                <a ng-click="delRow(generalFeelingsRess, $index)">
+                    <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
+                </a>
+            </div>
+            <div class="col-md-11 mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Point positif"
+                       ng-model="generalFeelingRess.content"
+                       ng-if="modified">
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="col-md-1 mb-3">
+                <a ng-click="addPositivePointRessRow($index)"
+                   ng-if="modified">
+                    <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
+                </a>
+            </div>
+        </div>
+        <p><strong>Points à améliorer : </strong></p>
+        <ul>
+            <li>Merci de vous référer aux constats d'audit</li>
+        </ul>
+        <h3>Impression générale – Réalisation / opérations</h3>
+        <p><strong>Points positifs : </strong></p>
+        <ul ng-if="!modified">
+            <li ng-repeat="generalFeelingProd in generalFeelingsProd">{{generalFeelingProd.content}}</li>
+        </ul>
+        <div class="form-row" ng-repeat="generalFeelingProd in generalFeelingsProd" ng-if="modified">
+            <div class="col-md-1 mb-3">
+                <a ng-click="delRow(generalFeelingsProd, $index)">
+                    <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
+                </a>
+            </div>
+            <div class="col-md-11 mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Point positif"
+                       ng-model="generalFeelingProd.content"
+                       ng-if="modified">
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="col-md-1 mb-3">
+                <a ng-click="addPositivePointProdRow($index)"
+                   ng-if="modified">
+                    <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
+                </a>
+            </div>
+        </div>
+        <p><strong>Points à améliorer : </strong></p>
+        <ul>
+            <li>Merci de vous référer aux constats d'audit</li>
+        </ul>
+        <h3>Impression générale – Evaluations de la performance / améliorations</h3>
+        <p><strong>Points positifs : </strong></p>
+        <ul ng-if="!modified">
+            <li ng-repeat="generalFeelingPerf in generalFeelingsPerf">{{generalFeelingPerf.content}}</li>
+        </ul>
+        <div class="form-row" ng-repeat="generalFeelingPerf in generalFeelingsPerf" ng-if="modified">
+            <div class="col-md-1 mb-3">
+                <a ng-click="delRow(generalFeelingsPerf, $index)">
+                    <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
+                </a>
+            </div>
+            <div class="col-md-11 mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Point positif"
+                       ng-model="generalFeelingPerf.content"
+                       ng-if="modified">
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="col-md-1 mb-3">
+                <a ng-click="addPositivePointPerfRow($index)"
+                   ng-if="modified">
+                    <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
+                </a>
+            </div>
+        </div>
+        <p><strong>Points à améliorer : </strong></p>
+        <ul>
+            <li>Merci de vous référer aux constats d'audit</li>
+        </ul>
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
@@ -592,10 +738,10 @@
                 <div class="col-md-6 mb-3">
                     <h5>Norme</h5>
                     <select class="form-control"
-                            ng-options="standard.pk_standards as standard.standard for standard in standards"
+                            ng-options="standard.pk_standard as standard.name for standard in standards"
                             ng-model="auditReport.fk_standard" ng-if="modified"></select>
                     <select class="form-control"
-                            ng-options="standard.pk_standards as standard.standard for standard in standards"
+                            ng-options="standard.pk_standard as standard.name for standard in standards"
                             ng-model="auditReport.fk_standard" ng-if="!modified" disabled></select>
                 </div>
                 <div class="col-md-6 mb-3">
@@ -741,23 +887,21 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col" class="table-conclusion-title" class="table-conclusion-title"
-                    class="table-conclusion-title" class="table-conclusion-title" class="table-conclusion-title">Revue
-                    du système de management de projet
-                </th>
-                <th scope="col" class="table-conclusion-yesno" class="table-conclusion-yesno"
-                    class="table-conclusion-yesno" class="table-conclusion-yesno" class="table-conclusion-yesno">Oui
-                </th>
+                <th scope="col" class="table-conclusion-title">Revue du système de management de projet</th>
+                <th scope="col" class="table-conclusion-yesno" class="table-conclusion-yesno">Oui</th>
+                <th scope="col" class="table-conclusion-comment">Remarque</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="conclusion in conclusionsReview" ng-if="!modified">
                 <td>{{conclusion.title}}</td>
-                <td><input type="checkbox" ng-checked="conclusion.yesno" disabled></td>
+                <td><input type="checkbox" ng-checked="conclusion.yes" disabled></td>
+                <td>{{conclusion.comment}}</td>
             </tr>
             <tr ng-repeat="conclusion in conclusionsReview" ng-if="modified">
                 <td>{{conclusion.title}}</td>
-                <td><input type="checkbox" ng-checked="conclusion.yesno"></td>
+                <td><input type="checkbox" ng-checked="conclusion.yes"></td>
+                <td><input class="form-control" ng-model="conclusion.comment"></td>
             </tr>
             </tbody>
         </table>
@@ -768,16 +912,19 @@
                     Impulse
                 </th>
                 <th scope="col" class="table-conclusion-yesno">Oui</th>
+                <th scope="col" class="table-conclusion-comment">Remarque</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="conclusion in conclusionsComments" ng-if="!modified">
                 <td>{{conclusion.title}}</td>
-                <td><input type="checkbox" ng-checked="conclusion.yesno" disabled></td>
+                <td><input type="checkbox" ng-checked="conclusion.yes" disabled></td>
+                <td>{{conclusion.comment}}</td>
             </tr>
             <tr ng-repeat="conclusion in conclusionsComments" ng-if="modified">
                 <td>{{conclusion.title}}</td>
-                <td><input type="checkbox" ng-checked="conclusion.yesno"></td>
+                <td><input type="checkbox" ng-checked="conclusion.yes"></td>
+                <td><input class="form-control" ng-model="conclusion.comment"></td>
             </tr>
             </tbody>
         </table>
@@ -786,16 +933,19 @@
             <tr>
                 <th scope="col" class="table-conclusion-title">Conformité du Système</th>
                 <th scope="col" class="table-conclusion-yesno">Oui</th>
+                <th scope="col" class="table-conclusion-comment">Remarque</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="conclusion in conclusionsCompliance" ng-if="!modified">
                 <td>{{conclusion.title}}</td>
-                <td><input type="checkbox" ng-checked="conclusion.yesno" disabled></td>
+                <td><input type="checkbox" ng-checked="conclusion.yes" disabled></td>
+                <td>{{conclusion.comment}}</td>
             </tr>
             <tr ng-repeat="conclusion in conclusionsCompliance" ng-if="modified">
                 <td>{{conclusion.title}}</td>
-                <td><input type="checkbox" ng-checked="conclusion.yesno"></td>
+                <td><input type="checkbox" ng-checked="conclusion.yes"></td>
+                <td><input class="form-control" ng-model="conclusion.comment"></td>
             </tr>
             </tbody>
         </table>
@@ -804,16 +954,19 @@
             <tr>
                 <th scope="col" class="table-conclusion-title">Non-conformité du Système</th>
                 <th scope="col" class="table-conclusion-yesno">Oui</th>
+                <th scope="col" class="table-conclusion-comment">Remarque</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="conclusion in conclusionsNoncompliance" ng-if="!modified">
                 <td>{{conclusion.title}}</td>
-                <td><input type="checkbox" ng-checked="conclusion.yesno" disabled></td>
+                <td><input type="checkbox" ng-checked="conclusion.yes" disabled></td>
+                <td>{{conclusion.comment}}</td>
             </tr>
             <tr ng-repeat="conclusion in conclusionsNoncompliance" ng-if="modified">
                 <td>{{conclusion.title}}</td>
-                <td><input type="checkbox" ng-checked="conclusion.yesno"></td>
+                <td><input type="checkbox" ng-checked="conclusion.yes"></td>
+                <td><input class="form-control" ng-model="conclusion.comment"></td>
             </tr>
             </tbody>
         </table>

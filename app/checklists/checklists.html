@@ -1,4 +1,5 @@
 <h1 class="jumbotron-heading">Checklists</h1>
+{{checklists}}
 <div ng-repeat="checklist in checklists">
     <h3 ng-if="!modified">{{checklist.name}}</h3>
 
@@ -14,24 +15,29 @@
         <thead>
         <tr>
             <th ng-if="modified"></th>
+            <th>Question</th>
             <th>Points</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="check in checklist.points" ng-if="!modified">
-            <td>{{check.point}}</td>
+        <tr ng-repeat="question in checklist.questions" ng-if="!modified">
+            <td>{{question.question}}</td>
+            <td>{{question.point}}</td>
         </tr>
-        <tr ng-repeat="check in checklist.points" ng-if="modified">
-            <td><a class="a-remove" ng-click="delRow(checklist.points, $index)">
+        <tr ng-repeat="question in checklist.questions" ng-if="modified">
+            <td><a class="a-remove" ng-click="delRow(checklist.questions, $index)">
                 <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
             </a></td>
             <td><input type="text" class="form-control"
-                       ng-model="check.point"></td>
+                       ng-model="question.question"></td>
+            <td><input type="number" min="1" max="3" class="form-control"
+                       ng-model="question.point"></td>
         </tr>
         <tr ng-if="modified">
-            <td><a ng-click="addCheck(checklist.points)">
+            <td><a ng-click="addCheck(checklist.questions)">
                 <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
             </a></td>
+            <td></td>
             <td></td>
         </tr>
         </tbody>

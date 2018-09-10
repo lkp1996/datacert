@@ -66,11 +66,15 @@
 }
 
 .table-conclusion-title {
-    width: 90%;
+    width: 50%;
 }
 
-table-conclusion-yesno {
+.table-conclusion-yesno {
     width: 10%;
+}
+
+.table-conclusion-comment {
+    width: 40%;
 }
 
 .table-doc-doc {
