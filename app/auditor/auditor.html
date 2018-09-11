@@ -28,6 +28,24 @@
                disabled>
     </div>
 </div>
+<div class="form-row">
+    <div class="col-md-6 mb-3">
+        <label>Type d'utilisateur</label>
+        <select ng-options="type.pk_userType as type.type for type in typeList" ng-model="auditor.fk_userType"
+                class="form-control" ng-if="modified"></select>
+        <select ng-options="type.pk_userType as type.type for type in typeList" ng-model="auditor.fk_userType"
+                class="form-control" ng-if="!modified" disabled></select>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label>Langue</label>
+        <select ng-options="language.pk_language as language.language for language in languages"
+                ng-model="auditor.fk_language"
+                class="form-control" ng-if="modified"></select>
+        <select ng-options="language.pk_language as language.language for language in languages"
+                ng-model="auditor.fk_language"
+                class="form-control" ng-if="!modified" disabled></select>
+    </div>
+</div>
 <div class="row placeholders">
     <div class="col-xs-12 col-sm-12 placeholder">
         <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
@@ -36,3 +54,4 @@
         <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
     </div>
 </div>
+{{auditor}}

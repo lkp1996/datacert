@@ -36,10 +36,10 @@
             <label>Langue</label>
             <select ng-options="language.pk_language as language.language for language in languages"
                     ng-model="auditor.fk_language"
-                    class="form-control"><option value="">-- Veuillez choisir une langue --</option></select>
+                    class="form-control">
+                <option value="">-- Veuillez choisir une langue --</option>
+            </select>
         </div>
     </div>
     <button class="btn btn-primary" type="submit" ng-click="add()" ng-disabled="form.$invalid">Confirmer</button>
 </form>
-{{auditor}}
-{{typeList}}

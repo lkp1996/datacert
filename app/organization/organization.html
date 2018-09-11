@@ -11,10 +11,10 @@
             </div>
         </div>
         <h5>Adresse(s)</h5>
-        <div class="form-row" ng-repeat="address in organization.addresses">
+        <div class="form-row" ng-repeat="address in addresses">
             <div class="col-md-1 mb-3">
-                <a ng-click="delRow(organization.addresses, $index)"
-                   ng-if="modified && organization.addresses.length > 1">
+                <a ng-click="delRow(addresses, $index)"
+                   ng-if="modified && addresses.length > 1">
                     <ng-md-icon icon="remove" style="fill: #c60000"></ng-md-icon>
                 </a>
             </div>
@@ -57,7 +57,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-1 mb-3">
-                <a ng-click="addRow(organization.addresses)"
+                <a ng-click="addRow(addresses)"
                    ng-if="modified">
                     <ng-md-icon icon="add" style="fill: #2f6ac6"></ng-md-icon>
                 </a>

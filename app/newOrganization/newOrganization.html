@@ -4,33 +4,33 @@
         <div class="col-md-12 mb-3">
             <label>Nom de l'organisation</label>
             <input type="text" class="form-control" placeholder="Nom" ng-required="true"
-                   required>
+                   ng-model="organization.name" required>
         </div>
     </div>
     <div class="form-row">
         <div class="col-md-3 mb-3">
             <label>Nom personne de contact</label>
             <input type="text" class="form-control" placeholder="Nom" ng-required="true"
-                   required>
+                   ng-model="organization.contactLastName" required>
         </div>
         <div class="col-md-3 mb-3">
             <label>Prénom personne de contact</label>
             <input type="text" class="form-control" placeholder="Prénom" ng-required="true"
-                   required>
+                   ng-model="organization.contactFirstName" required>
         </div>
         <div class="col-md-3 mb-3">
             <label>Téléphone</label>
             <input type="text" class="form-control" placeholder="Téléphone" ng-required="true"
-                   required>
+                   ng-model="organization.phone" required>
         </div>
         <div class="col-md-3 mb-3">
             <label>Email</label>
             <input type="email" class="form-control" placeholder="Email" ng-required="true"
-                   required>
+                   ng-model="organization.email" required>
         </div>
     </div>
     <div class="form-row">
 
     </div>
-    <button class="btn btn-primary" type="submit" ng-disabled="form.$invalid">Confirmer</button>
+    <button class="btn btn-primary" type="submit" ng-click="add()" ng-disabled="form.$invalid">Confirmer</button>
 </form>
