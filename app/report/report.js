@@ -112,6 +112,8 @@ angular.module('myApp.report', ['ngRoute'])
             $http.get(Constant.url + "?report_general_infos=" + $routeParams.reportId).then(
                 function (data) {
                     $scope.generalInfos = data.data[0];
+                    $scope.generalInfos.numberAuditDays = $scope.generalInfos.numberAuditDays - 0;
+                    $scope.generalInfos.auditSiteDuration = $scope.generalInfos.auditSiteDuration - 0;
                 }
             );
         };
@@ -146,7 +148,9 @@ angular.module('myApp.report', ['ngRoute'])
         $scope.getAuditScopes = function () {
             $http.get(Constant.url + "?audit_scopes=" + $routeParams.reportId).then(
                 function (data) {
-                    $scope.auditScopes = data.data;
+                    console.log(data);
+                    if (data.data != "null")
+                        $scope.auditScopes = data.data;
                 }
             );
         };
@@ -349,84 +353,189 @@ angular.module('myApp.report', ['ngRoute'])
         };
 
         $scope.updateGeneralInfos = function () {
-            $scope.modified = false;
-            angular.forEach($scope.tabs, function (tab, key) {
-                if ($scope.active != key) {
-                    tab.disabled = false;
+            $http.post(Constant.url,
+                $scope.generalInfos
+            ).then(
+                function (data) {
+                    $scope.updateAuditDate();
                 }
+            );
+        };
+
+        $scope.updateAuditDate = function () {
+            angular.forEach($scope.auditDates, function (auditDate, key) {
+                auditDate.auditDate = new Date(auditDate.auditDate).getTime();
             });
+            $http.post(Constant.url,
+                $scope.auditDates
+            ).then(
+                function (data) {
+                    $scope.updateAuditScopes();
+                }
+            );
+        };
+
+        $scope.updateAuditScopes = function () {
+            $http.post(Constant.url,
+                $scope.auditScopes
+            ).then(
+                function (data) {
+                    $scope.cancel();
+                }
+            );
         };
 
         $scope.updateAuditPlan = function () {
-            $scope.modified = false;
-            angular.forEach($scope.tabs, function (tab, key) {
-                if ($scope.active != key) {
-                    tab.disabled = false;
-                }
+            angular.forEach($scope.plans, function (plan, key) {
+                plan.startDate = new Date(plan.startDate).getTime();
+                plan.endDate = new Date(plan.endDate).getTime();
             });
+            /*$http.post(Constant.url,
+                $scope.auditManager
+            ).then(
+                function (data) {
+                    $http.post(Constant.url,
+                        $scope.auditors
+                    ).then(
+                        function (data) {
+                            $http.post(Constant.url,
+                                $scope.plans
+                            ).then(
+                                function (data) {
+                                    $scope.cancel();
+                                }
+                            );
+                        }
+                    );
+                }
+            );*/
+            $http.post(Constant.url,
+                $scope.auditManager
+            ).then(
+                function (data) {
+                    console.log(data.data);
+                });
+
         };
 
         $scope.updateChecklists = function () {
-            $scope.modified = false;
-            angular.forEach($scope.tabs, function (tab, key) {
-                if ($scope.active != key) {
-                    tab.disabled = false;
+            $http.post(Constant.url,
+                $scope.checklists
+            ).then(
+                function (data) {
+                    $scope.cancel();
                 }
-            });
+            );
         };
 
         $scope.updateGeneralFeelings = function () {
-            $scope.modified = false;
-            angular.forEach($scope.tabs, function (tab, key) {
-                if ($scope.active != key) {
-                    tab.disabled = false;
+            $http.post(Constant.url,
+                $scope.generalFeelingsM
+            ).then(
+                function (data) {
+                    $http.post(Constant.url,
+                        $scope.generalFeelingsMS
+                    ).then(
+                        function (data) {
+                            $http.post(Constant.url,
+                                $scope.generalFeelingsPerf
+                            ).then(
+                                function (data) {
+                                    $http.post(Constant.url,
+                                        $scope.generalFeelingsProd
+                                    ).then(
+                                        function (data) {
+                                            $http.post(Constant.url,
+                                                $scope.generalFeelingsRess
+                                            ).then(
+                                                function (data) {
+                                                    $scope.cancel();
+                                                }
+                                            );
+                                        }
+                                    );
+                                }
+                            );
+                        }
+                    );
                 }
-            });
+            );
         };
 
-        $scope.updateAuditTeamAndAuditedPeople = function () {
-            $scope.modified = false;
-            angular.forEach($scope.tabs, function (tab, key) {
-                if ($scope.active != key) {
-                    tab.disabled = false;
+        $scope.updateAuditedPeople = function () {
+            $http.post(Constant.url,
+                $scope.auditedPeople
+            ).then(
+                function (data) {
+                    $scope.cancel();
                 }
-            });
+            );
         };
 
         $scope.updateAuditReport = function () {
-            $scope.modified = false;
-            angular.forEach($scope.tabs, function (tab, key) {
-                if ($scope.active != key) {
-                    tab.disabled = false;
+            $http.post(Constant.url,
+                $scope.auditReports
+            ).then(
+                function (data) {
+                    $scope.cancel();
                 }
-            });
+            );
         };
 
         $scope.updateConclusion = function () {
-            $scope.modified = false;
-            angular.forEach($scope.tabs, function (tab, key) {
-                if ($scope.active != key) {
-                    tab.disabled = false;
+            $scope.conclusion.nextAuditFirstDaysDate = new Date($scope.conclusion.nextAuditFirstDaysDate).getTime();
+            $http.post(Constant.url,
+                $scope.conclusion
+            ).then(
+                function (data) {
+                    $http.post(Constant.url,
+                        $scope.conclusionsComments
+                    ).then(
+                        function (data) {
+                            $http.post(Constant.url,
+                                $scope.conclusionsCompliance
+                            ).then(
+                                function (data) {
+                                    $http.post(Constant.url,
+                                        $scope.conclusionsNoncompliance
+                                    ).then(
+                                        function (data) {
+                                            $http.post(Constant.url,
+                                                $scope.conclusionsReview
+                                            ).then(
+                                                function (data) {
+                                                    $scope.cancel();
+                                                }
+                                            );
+                                        }
+                                    );
+                                }
+                            );
+                        }
+                    );
                 }
-            });
+            );
         };
 
         $scope.updateDocuments = function () {
-            $scope.modified = false;
-            angular.forEach($scope.tabs, function (tab, key) {
-                if ($scope.active != key) {
-                    tab.disabled = false;
+            $http.post(Constant.url,
+                $scope.documents
+            ).then(
+                function (data) {
+                    $scope.cancel();
                 }
-            });
+            );
         };
 
         $scope.updateCertificationDecision = function () {
-            $scope.modified = false;
-            angular.forEach($scope.tabs, function (tab, key) {
-                if ($scope.active != key) {
-                    tab.disabled = false;
+            $scope.certificationDecision.decisionDate = new Date($scope.certificationDecision.decisionDate).getTime();
+            $http.post(Constant.url,
+                $scope.certificationDecision
+            ).then(
+                function (data) {
+                    $scope.cancel();
                 }
-            });
+            );
         };
 
         $scope.cancel = function () {
@@ -434,6 +543,7 @@ angular.module('myApp.report', ['ngRoute'])
             angular.forEach($scope.tabs, function (tab, key) {
                 tab.disabled = false;
             });
+            $scope.getAll();
         };
 
         $scope.delRow = function (array, index) {
@@ -450,18 +560,18 @@ angular.module('myApp.report', ['ngRoute'])
         };
 
         $scope.addAuditDateRow = function () {
-            if (!Array.isArray($scope.generalInfos.auditDates)) {
-                $scope.generalInfos.auditDates = [{"pk_auditDate": 0, "auditDate": ""}];
+            if (!Array.isArray($scope.auditDates)) {
+                $scope.auditDates = [{"pk_auditDate": 0, "auditDate": "", "fk_report": $routeParams.reportId}];
             } else {
-                $scope.generalInfos.auditDates.push({"pk_auditDate": 0, "auditDate": ""});
+                $scope.auditDates.push({"pk_auditDate": 0, "auditDate": "", "fk_report": $routeParams.reportId});
             }
         };
 
         $scope.addAuditScope = function () {
             if (!Array.isArray($scope.auditScopes)) {
-                $scope.auditScopes = [{"fk_report": $routeParams.reportId, "fk_scope": "1"}];
+                $scope.auditScopes = [{"pk_reportScope": null, "fk_report": $routeParams.reportId, "fk_scope": "1"}];
             } else {
-                $scope.auditScopes.push({"fk_report": $routeParams.reportId, "fk_scope": "1"});
+                $scope.auditScopes.push({"pk_reportScope": null, "fk_report": $routeParams.reportId, "fk_scope": "1"});
             }
         };
 
@@ -623,31 +733,35 @@ angular.module('myApp.report', ['ngRoute'])
             fileUpload.uploadFileToUrl(file, uploadUrl, id, type);
         };
 
-        $scope.getReportGeneralInfos();
-        $scope.getAuditDates();
-        $scope.getAuditTypes();
-        $scope.getScopes();
-        $scope.getAuditScopes();
-        $scope.getPlan();
-        $scope.getAuditManager();
-        $scope.getAuditors();
-        $scope.getAuditedPeople();
-        $scope.getChecklists();
-        $scope.getOtherChecklists();
-        $scope.getGeneralFeelingsManagementSystem();
-        $scope.getGeneralFeelingsManagement();
-        $scope.getGeneralFeelingsPerformance();
-        $scope.getGeneralFeelingsProduction();
-        $scope.getGeneralFeelingsRessource();
-        $scope.getAuditReports();
-        $scope.getStandards();
-        $scope.getInterpretation();
-        $scope.getConclusion();
-        $scope.getConclusionComment();
-        $scope.getConclusionCompliance();
-        $scope.getConclusionNoncompliance();
-        $scope.getConclusionReview();
-        $scope.getStatus();
-        $scope.getCertificationDecision();
-        $scope.getDocuments();
+        $scope.getAll = function () {
+            $scope.getReportGeneralInfos();
+            $scope.getAuditDates();
+            $scope.getAuditTypes();
+            $scope.getScopes();
+            $scope.getAuditScopes();
+            $scope.getPlan();
+            $scope.getAuditManager();
+            $scope.getAuditors();
+            $scope.getAuditedPeople();
+            $scope.getChecklists();
+            $scope.getOtherChecklists();
+            $scope.getGeneralFeelingsManagementSystem();
+            $scope.getGeneralFeelingsManagement();
+            $scope.getGeneralFeelingsPerformance();
+            $scope.getGeneralFeelingsProduction();
+            $scope.getGeneralFeelingsRessource();
+            $scope.getAuditReports();
+            $scope.getStandards();
+            $scope.getInterpretation();
+            $scope.getConclusion();
+            $scope.getConclusionComment();
+            $scope.getConclusionCompliance();
+            $scope.getConclusionNoncompliance();
+            $scope.getConclusionReview();
+            $scope.getStatus();
+            $scope.getCertificationDecision();
+            $scope.getDocuments();
+        };
+
+        $scope.getAll();
     }]);

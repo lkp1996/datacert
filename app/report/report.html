@@ -160,10 +160,10 @@
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <h5>Nombre de jours d'audit</h5>
-                <input type="number" class="form-control" placeholder="Nombre de jours d'audit"
+                <input type="number" min="1" class="form-control" placeholder="Nombre de jours d'audit"
                        ng-model="generalInfos.numberAuditDays"
                        ng-if="modified">
-                <input type="number" class="form-control" placeholder="Nombre de jours d'audit"
+                <input type="number" min="1" class="form-control" placeholder="Nombre de jours d'audit"
                        ng-model="generalInfos.numberAuditDays"
                        ng-if="!modified" disabled>
             </div>
@@ -171,10 +171,10 @@
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <h5>Durée d'audit sur site (h)</h5>
-                <input type="text" class="form-control"
+                <input type="number" min="1" class="form-control"
                        placeholder="Durée d'audit sur site (h)"
                        ng-model="generalInfos.auditSiteDuration" ng-if="modified">
-                <input type="text" class="form-control"
+                <input type="number" min="1" class="form-control"
                        placeholder="Durée d'audit sur site (h)"
                        ng-model="generalInfos.auditSiteDuration" ng-if="!modified"
                        disabled>
@@ -195,11 +195,11 @@
         <div class="form-row">
             <div class="col-md-12 mb-3">
                 <h5>Produits et activités exclus du périmètre de certification</h5>
-                <input type="number" class="form-control"
+                <input type="text" class="form-control"
                        placeholder="Produits et activités exclus du périmètre de certification"
                        ng-model="generalInfos.excludedProductsAndActivities"
                        ng-if="modified">
-                <input type="number" class="form-control"
+                <input type="text" class="form-control"
                        placeholder="Produits et activités exclus du périmètre de certification"
                        ng-model="generalInfos.excludedProductsAndActivities"
                        ng-if="!modified" disabled>
@@ -278,21 +278,21 @@
             <div class="col-md-6 mb-3">
                 <input type="text" class="form-control"
                        placeholder="Nom"
-                       ng-model="auditManager.lastName"
+                       ng-model="auditManager.auditManagerLastName"
                        ng-if="modified">
                 <input type="text" class="form-control"
                        placeholder="Nom"
-                       ng-model="auditManager.lastName"
+                       ng-model="auditManager.auditManagerLastName"
                        ng-if="!modified" disabled>
             </div>
             <div class="col-md-6 mb-3">
                 <input type="text" class="form-control"
                        placeholder="Prénom"
-                       ng-model="auditManager.firstName"
+                       ng-model="auditManager.auditManagerFirstName"
                        ng-if="modified">
                 <input type="text" class="form-control"
                        placeholder="Prénom"
-                       ng-model="auditManager.firstName"
+                       ng-model="auditManager.auditManagerFirstName"
                        ng-if="!modified" disabled>
             </div>
         </div>
@@ -454,21 +454,21 @@
             <div class="col-md-6 mb-3">
                 <input type="text" class="form-control"
                        placeholder="Nom"
-                       ng-model="auditManager.lastName"
+                       ng-model="auditManager.auditManagerLastName"
                        ng-if="modified">
                 <input type="text" class="form-control"
                        placeholder="Nom"
-                       ng-model="auditManager.lastName"
+                       ng-model="auditManager.auditManagerLastName"
                        ng-if="!modified" disabled>
             </div>
             <div class="col-md-6 mb-3">
                 <input type="text" class="form-control"
                        placeholder="Prénom"
-                       ng-model="auditManager.firstName"
+                       ng-model="auditManager.auditManagerFirstName"
                        ng-if="modified">
                 <input type="text" class="form-control"
                        placeholder="Prénom"
-                       ng-model="auditManager.firstName"
+                       ng-model="auditManager.auditManagerFirstName"
                        ng-if="!modified" disabled>
             </div>
         </div>
@@ -555,7 +555,7 @@
             <div class="col-md-12 mb-3">
                 <input type="button" value="Modifier" class="btn btn-dark" ng-click="modif()"
                        ng-if="!modified">
-                <button class="btn btn-success" ng-click="updateAuditTeamAndAuditedPeople()" ng-if="modified">
+                <button class="btn btn-success" ng-click="updateAuditedPeople()" ng-if="modified">
                     Sauvegarder
                 </button>
                 <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
@@ -1089,3 +1089,4 @@
         </div>
     </uib-tab>
 </uib-tabset>
+{{auditManager}}
